@@ -15,7 +15,7 @@ coinRouter.put(
       const { amount, operation } = req.body;
   
       if (operation === 'add') {
-        const result = await coinService.addCoin({ user_id });
+        const result = await coinService.addCoin({ user_id, amount });
         res.json({ coin: result.coin });
       } else if (operation === 'deduct') {
         const result = await coinService.deductCoin({ user_id, amount });

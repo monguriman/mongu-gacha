@@ -1,21 +1,56 @@
 import React, { useState, useEffect } from "react";
 import * as Api from "../../api";
 
-function MiningForm({ portfolioOwnerId, isEditable }) {
+function MiningForm() {
+  const [coin, setCoin] = useState(null);
 
-  // useState 훅을 통해 user 상태를 생성함.
-  const [user, setUser] = useState(null);
+  const handleAddCoin = async () => {
+    try {
+      const response = await Api.put("coin", {
+        amount: 1,
+        operation: "add",
+      });
+      setCoin(response.data.coin);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDeductCoin = async () => {
+    try {
+      const response = await Api.put("coin", {
+        amount: 1,
+        operation: "deduct",
+      });
+      setCoin(response.data.coin);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    // "users/유저id" 엔드포인트로 GET 요청을 하고, user를 response의 data로 세팅함.
-    Api.get("users", portfolioOwnerId).then((res) => setUser(res.data));
-  }, [portfolioOwnerId]);
+    const fetchCurrentUserCoin = async () => {
+      try {
+        const response = await Api.get("user/current");
+        setCoin(response.data.coin);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCurrentUserCoin();
+  }, []);
+
+  if (coin === null) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
-        <button>+</button>
-        <br />
-        <button>-</button>
+      <button type='button' onClick={handleAddCoin}>+</button>
+      <br />
+      <button type='button' onClick={handleDeductCoin}>-</button>
+      <br />
+      <span>코인: {coin}</span>
     </>
   );
 }

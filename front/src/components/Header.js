@@ -26,10 +26,13 @@ function Header() {
   return (
     <Nav activeKey={location.pathname}>
       <Nav.Item className="me-auto mb-5">
-        <Nav.Link disabled>안녕하세요, 포트폴리오 공유 서비스입니다.</Nav.Link>
+        <Nav.Link disabled>MONGU GACHA :: Collect your Mongu Cards!</Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link onClick={() => navigate("/")}>나의 페이지</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link onClick={() => navigate("/mining")}>채굴</Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link onClick={() => navigate("/network")}>네트워크</Nav.Link>

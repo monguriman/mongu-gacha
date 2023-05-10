@@ -1,0 +1,23 @@
+@keyframes shimmer {
+  0% {
+    border-color: transparent;
+  }
+  10% {
+    border-color: yellow;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+
+.coin-text {
+  padding: 7px;
+  animation: none;
+}
+
+.coin-text.shimmer-animation {
+  border: solid 5px;
+  border-radius: 20px;
+  animation: shimmer 0.25s linear;
+  box-shadow: 3px 3px 10px yellow;
+}

@@ -3,6 +3,7 @@ import * as Api from "../../api";
 
 function MiningForm() {
   const [coin, setCoin] = useState(null);
+  const [isImageVisible, setIsImageVisible] = useState(false);
 
   const handleAddCoin = async () => {
     try {
@@ -11,6 +12,7 @@ function MiningForm() {
         operation: "add",
       });
       setCoin(response.data.coin);
+      setIsImageVisible(!isImageVisible);
     } catch (error) {
       console.error(error);
     }
@@ -46,11 +48,17 @@ function MiningForm() {
 
   return (
     <>
-      <button type='button' onClick={handleAddCoin}>+</button>
+      <button type='button' onMouseDown={handleAddCoin}>+</button>
       <br />
-      <button type='button' onClick={handleDeductCoin}>-</button>
+      <button type='button' onMouseDown={handleDeductCoin}>-</button>
       <br />
       <span>코인: {coin}</span>
+      {isImageVisible && (
+        <>
+          <img src="../../images/digging_1.png" alt="Image 1" />
+          <img src="image2.jpg" alt="Image 2" />
+        </>
+      )}
     </>
   );
 }

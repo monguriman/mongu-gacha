@@ -11,7 +11,6 @@ coinRouter.put(
   async function (req, res, next) {
     try {
       const user_id = req.currentUserId;
-      console.log(user_id);
       const { amount, operation } = req.body;
   
       if (operation === 'add') {

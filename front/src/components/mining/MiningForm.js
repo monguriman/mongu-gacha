@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import * as Api from "../../api";
+import mining_1 from '../../images/mining_1.png';
+import mining_2 from '../../images/mining_2.png';
 
 function MiningForm() {
   const [coin, setCoin] = useState(null);
-  const [isImageVisible, setIsImageVisible] = useState(false);
+  const [imageNumber, setImageNumber] = useState(1);
 
   const handleAddCoin = async () => {
     try {
@@ -12,7 +14,7 @@ function MiningForm() {
         operation: "add",
       });
       setCoin(response.data.coin);
-      setIsImageVisible(!isImageVisible);
+      setImageNumber(prevImageNumber => prevImageNumber === 1 ?  2 : 1); // 이미지 번호를 교대로 변경
     } catch (error) {
       console.error(error);
     }
@@ -53,12 +55,7 @@ function MiningForm() {
       <button type='button' onMouseDown={handleDeductCoin}>-</button>
       <br />
       <span>코인: {coin}</span>
-      {isImageVisible && (
-        <>
-          <img src="../../images/digging_1.png" alt="Image 1" />
-          <img src="image2.jpg" alt="Image 2" />
-        </>
-      )}
+      {imageNumber === 1 ? <img src={mining_1} alt="Image 1" width='50%' /> : <img src={mining_2} alt="Image 2" width='50%' />}
     </>
   );
 }

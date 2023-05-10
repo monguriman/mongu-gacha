@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
+import Navbar from 'react-bootstrap/Navbar';
 import { UserStateContext, DispatchContext } from "../App";
 
 function Header() {
@@ -25,25 +26,25 @@ function Header() {
 
   return (
     <>
-    <Nav activeKey={location.pathname}>
-      <Nav.Item className="me-auto mb-5">
-        <Nav.Link disabled>MONGU GACHA :: Collect your Mongu Cards!</Nav.Link>
+    <Navbar activeKey={location.pathname} style={{backgroundColor: '#1098F7'}}>
+      <Nav.Item className="me-auto m-3">
+        <Nav.Link disabled>Mongu Collectors</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link onClick={() => navigate("/")}>나의 페이지</Nav.Link>
+        <Nav.Link onClick={() => navigate("/")} style={{color: '#FFFFFF', fontWeight: '500'}}>나의 페이지</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link onClick={() => navigate("/mining")}>채굴</Nav.Link>
+        <Nav.Link onClick={() => navigate("/mining")} style={{color: '#FFFFFF', fontWeight: '500'}}>채굴</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link onClick={() => navigate("/network")}>네트워크</Nav.Link>
+        <Nav.Link onClick={() => navigate("/network")} style={{color: '#FFFFFF', fontWeight: '500'}}>네트워크</Nav.Link>
       </Nav.Item>
       {isLogin && (
         <Nav.Item>
-          <Nav.Link onClick={logout}>로그아웃</Nav.Link>
+          <Nav.Link onClick={logout} style={{color: '#FFFFFF', fontWeight: '500'}}>로그아웃</Nav.Link>
         </Nav.Item>
       )}
-    </Nav>
+    </Navbar>
     </>
   );
 }

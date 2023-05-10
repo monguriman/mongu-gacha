@@ -24,6 +24,7 @@ function Header() {
   };
 
   return (
+    <>
     <Nav activeKey={location.pathname}>
       <Nav.Item className="me-auto mb-5">
         <Nav.Link disabled>MONGU GACHA :: Collect your Mongu Cards!</Nav.Link>
@@ -43,6 +44,7 @@ function Header() {
         </Nav.Item>
       )}
     </Nav>
+    </>
   );
 }
 

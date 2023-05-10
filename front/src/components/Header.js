@@ -27,17 +27,17 @@ function Header() {
   return (
     <>
     <Navbar activeKey={location.pathname} style={{backgroundColor: '#1098F7'}}>
-      <Nav.Item className="me-auto m-3">
-        <Nav.Link disabled>Mongu Collectors</Nav.Link>
+      <Nav.Item className="me-auto mb-3 mt-3 ms-5">
+        <Nav.Link disabled style={{color: '#FFFFFF', fontSize: '25px', border: 'solid 1px white', borderRadius: '2px', backgroundColor: '#000000'}}>Mongu Collectors</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link onClick={() => navigate("/")} style={{color: '#FFFFFF', fontWeight: '500'}}>나의 페이지</Nav.Link>
+        <Nav.Link onClick={() => navigate("/")} style={{color: '#FFFFFF', fontWeight: '500'}}>홈🐾</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link onClick={() => navigate("/mining")} style={{color: '#FFFFFF', fontWeight: '500'}}>채굴</Nav.Link>
+        <Nav.Link onClick={() => navigate("/mining")} style={{color: '#FFFFFF', fontWeight: '500'}}>채굴✨</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link onClick={() => navigate("/network")} style={{color: '#FFFFFF', fontWeight: '500'}}>네트워크</Nav.Link>
+        <Nav.Link onClick={() => navigate("/network")} style={{color: '#FFFFFF', fontWeight: '500'}}>도감🖼️</Nav.Link>
       </Nav.Item>
       {isLogin && (
         <Nav.Item>

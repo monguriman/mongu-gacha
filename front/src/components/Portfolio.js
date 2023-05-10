@@ -64,7 +64,10 @@ function Portfolio() {
         <Col>
 
           <div style={{ textAlign: "center" }}>
-            학력 목록, 수상이력 목록, 프로젝트 목록, 자격증 목록 만들기
+            금주의 픽업 카드 배너영역
+            <br />
+            <br />
+            도감점수에 따른 랭킹 영역
           </div>
 
         </Col>

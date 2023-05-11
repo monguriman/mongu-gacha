@@ -26,18 +26,18 @@ function Header() {
 
   // portfolioOwner 정보를 가져옴
   const portfolioOwner = userState.user;
-  console.log(portfolioOwner);
+
   return (
     
     <>
-      <Navbar activeKey={location.pathname} style={{backgroundColor: '#1098F7'}}>
+      <Navbar activeKey={location.pathname} style={{backgroundColor: 'black', opacity: '70%'}}>
         <Nav.Item className="me-auto mb-1 mt-1 ms-5">
           <Nav.Link onClick={() => navigate("/")} style={{color: '#FFFFFF', fontSize: '25px', border: 'solid 1px white', borderRadius: '2px', backgroundColor: '#000000'}}>Mongu Collectors</Nav.Link>
         </Nav.Item>
         {isLogin && portfolioOwner && (
-        <div style={{ textAlign: 'center', padding: '10px' }}>
+        <div style={{ textAlign: 'center', padding: '10px', color: '#FFFFFF'}}>
           <p>Lv.1 {portfolioOwner.name}</p>
-          <p>코인 {portfolioOwner.coin}</p>
+          <p>코인 소지량 {portfolioOwner.coin}</p>
         </div>
       )}
         <Nav.Item>

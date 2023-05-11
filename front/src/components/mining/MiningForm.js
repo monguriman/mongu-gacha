@@ -73,9 +73,9 @@ function MiningForm() {
       <Card style={{ width: "360px" }} className="text-center">
         <Card.Body>
           <div ontouchstart="">
-            <div className='button' onMouseDown={handleAddCoin}>
+            <button className='miningButton' onMouseDown={handleAddCoin}>
               <a>채굴</a>
-            </div>
+            </button>
           </div>
           <br />
           <span className={`coin-text ${shimmer ? "shimmer-animation" : ""}`}>

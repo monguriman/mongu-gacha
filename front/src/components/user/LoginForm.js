@@ -4,6 +4,9 @@ import { Container, Col, Row, Form, Button } from "react-bootstrap";
 
 import * as Api from "../../api";
 import { DispatchContext } from "../../App";
+import background from '../../images/background.jpg'
+
+import "../../styles/LoginForm.css";
 
 function LoginForm() {
   const navigate = useNavigate();

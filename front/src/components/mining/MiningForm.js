@@ -81,8 +81,9 @@ function MiningForm() {
           <span className={`coin-text ${shimmer ? "shimmer-animation" : ""}`}>
             코인 {coin}
           </span>
-          {criticalText && <div className="critical-text">Critical! +10</div>}
           <br />
+          <br />
+          {criticalText ? <div className="critical-text">Critical! +10</div> : <div>　</div>}
           {imageNumber === 1 ? (
             <Image src={mining_1} alt="Image 1" width="50%" fluid />
           ) : (

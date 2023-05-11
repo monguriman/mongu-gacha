@@ -24,24 +24,36 @@ function Header() {
     navigate("/");
   };
 
+  // portfolioOwner 정보를 가져옴
+  const portfolioOwner = userState.user;
+  console.log(portfolioOwner);
   return (
+    
     <>
-    <Navbar activeKey={location.pathname} style={{backgroundColor: '#1098F7'}}>
-      <Nav.Item className="me-auto mb-3 mt-3 ms-5">
-        <Nav.Link onClick={() => navigate("/")} style={{color: '#FFFFFF', fontSize: '25px', border: 'solid 1px white', borderRadius: '2px', backgroundColor: '#000000'}}>Mongu Collectors</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link onClick={() => navigate("/mining")} style={{color: '#FFFFFF', fontWeight: '500'}}>채굴✨</Nav.Link>
-      </Nav.Item>
-      <Nav.Item>
-        <Nav.Link onClick={() => navigate("/network")} style={{color: '#FFFFFF', fontWeight: '500'}}>도감🖼️</Nav.Link>
-      </Nav.Item>
-      {isLogin && (
-        <Nav.Item>
-          <Nav.Link onClick={logout} style={{color: '#FFFFFF', fontWeight: '500'}}>로그아웃</Nav.Link>
+      <Navbar activeKey={location.pathname} style={{backgroundColor: '#1098F7'}}>
+        <Nav.Item className="me-auto mb-1 mt-1 ms-5">
+          <Nav.Link onClick={() => navigate("/")} style={{color: '#FFFFFF', fontSize: '25px', border: 'solid 1px white', borderRadius: '2px', backgroundColor: '#000000'}}>Mongu Collectors</Nav.Link>
         </Nav.Item>
+        {isLogin && portfolioOwner && (
+        <div style={{ textAlign: 'center', padding: '10px' }}>
+          <p>Lv.1 {portfolioOwner.name}</p>
+          <p>코인 {portfolioOwner.coin}</p>
+        </div>
       )}
-    </Navbar>
+        <Nav.Item>
+          <Nav.Link onClick={() => navigate("/mining")} style={{color: '#FFFFFF', fontWeight: '500'}}>채굴</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link onClick={() => navigate("/network")} style={{color: '#FFFFFF', fontWeight: '500'}}>도감</Nav.Link>
+        </Nav.Item>
+        {isLogin && (
+          <Nav.Item>
+            <Nav.Link onClick={logout} style={{color: '#FFFFFF', fontWeight: '500'}}>로그아웃</Nav.Link>
+          </Nav.Item>
+        )}
+      </Navbar>
+
+
     </>
   );
 }

@@ -1,21 +1,20 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { Container, Col, Row, Form, Button } from "react-bootstrap";
+import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Container, Col, Row, Form, Button } from 'react-bootstrap'
 
-import * as Api from "../../api";
-import { DispatchContext } from "../../App";
-import background from '../../images/background.jpg'
+import * as Api from '../../api'
+import { DispatchContext } from '../../App'
 
-import "../../styles/LoginForm.css";
+import '../../styles/LoginForm.css'
 
 function LoginForm() {
-  const navigate = useNavigate();
-  const dispatch = useContext(DispatchContext);
+  const navigate = useNavigate()
+  const dispatch = useContext(DispatchContext)
 
   //useState로 email 상태를 생성함.
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('abc@example.com')
   //useState로 password 상태를 생성함.
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('1111')
 
   //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
   const validateEmail = (email) => {
@@ -23,100 +22,107 @@ function LoginForm() {
       .toLowerCase()
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
+      )
+  }
 
   //위 validateEmail 함수를 통해 이메일 형태 적합 여부를 확인함.
-  const isEmailValid = validateEmail(email);
+  const isEmailValid = validateEmail(email)
   // 비밀번호가 4글자 이상인지 여부를 확인함.
-  const isPasswordValid = password.length >= 4;
+  const isPasswordValid = password.length >= 4
   //
   // 이메일과 비밀번호 조건이 동시에 만족되는지 확인함.
-  const isFormValid = isEmailValid && isPasswordValid;
+  const isFormValid = isEmailValid && isPasswordValid
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       // "user/login" 엔드포인트로 post요청함.
-      const res = await Api.post("user/login", {
+      const res = await Api.post('user/login', {
         email,
         password,
-      });
+      })
       // 유저 정보는 response의 data임.
-      const user = res.data;
+      const user = res.data
       // JWT 토큰은 유저 정보의 token임.
-      const jwtToken = user.token;
+      const jwtToken = user.token
       // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
-      sessionStorage.setItem("userToken", jwtToken);
+      sessionStorage.setItem('userToken', jwtToken)
       // dispatch 함수를 이용해 로그인 성공 상태로 만듦.
       dispatch({
-        type: "LOGIN_SUCCESS",
+        type: 'LOGIN_SUCCESS',
         payload: user,
-      });
+      })
 
       // 기본 페이지로 이동함.
-      navigate("/", { replace: true });
+      navigate('/', { replace: true })
     } catch (err) {
-      console.log("로그인에 실패하였습니다.\n", err);
+      console.log('로그인에 실패하였습니다.\n', err)
     }
-  };
+  }
 
   return (
     <Container>
-      <Row className="justify-content-md-center mt-5">
-        <Col lg={8}>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="loginEmail">
-              <Form.Label>이메일 주소</Form.Label>
-              <Form.Control
-                type="email"
-                autoComplete="on"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              {!isEmailValid && (
-                <Form.Text className="text-success">
-                  이메일 형식이 올바르지 않습니다.
-                </Form.Text>
-              )}
-            </Form.Group>
+      <form class="form_main" onSubmit={handleSubmit}>
+        <p class="heading">Login</p>
+        <div class="inputContainer">
+          <svg
+            viewBox="0 0 16 16"
+            fill="#2e2e2e"
+            height="16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+            class="inputIcon"
+          >
+            <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"></path>
+          </svg>
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            id="username"
+            class="inputField"
+            type="text"
+          />
+        </div>
+        {!isEmailValid && (
+          <Form.Text className="text-success mt-0 mb-0" style={{fontSize: '12.5px', alignSelf: 'flex-start'}}>
+            　이메일 형식이 올바르지 않습니다.
+          </Form.Text>
+        )}
 
-            <Form.Group controlId="loginPassword" className="mt-3">
-              <Form.Label>비밀번호</Form.Label>
-              <Form.Control
-                type="password"
-                autoComplete="on"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {!isPasswordValid && (
-                <Form.Text className="text-success">
-                  비밀번호는 4글자 이상입니다.
-                </Form.Text>
-              )}
-            </Form.Group>
+        <div class="inputContainer">
+          <svg
+            viewBox="0 0 16 16"
+            fill="#2e2e2e"
+            height="16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+            class="inputIcon"
+          >
+            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+          </svg>
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            id="password"
+            class="inputField"
+            type="password"
+          />
+        </div>
+        {!isPasswordValid && (
+          <Form.Text className="text-success mt-0 mb-0" style={{fontSize: '12.5px', alignSelf: 'flex-start'}}>
+            　비밀번호는 4글자 이상입니다.
+          </Form.Text>
+        )}
 
-            <Form.Group as={Row} className="mt-3 text-center">
-              <Col sm={{ span: 20 }}>
-                <Button variant="primary" type="submit" disabled={!isFormValid}>
-                  로그인
-                </Button>
-              </Col>
-            </Form.Group>
-
-            <Form.Group as={Row} className="mt-3 text-center">
-              <Col sm={{ span: 20 }}>
-                <Button variant="light" onClick={() => navigate("/register")}>
-                  회원가입하기
-                </Button>
-              </Col>
-            </Form.Group>
-          </Form>
-        </Col>
-      </Row>
+        <button id="button">Submit</button>
+        <div class="signupContainer">
+          <p>Don't have any account?</p>
+          <a onClick={() => navigate('/register')} style={{color: 'white'}}>Sign up</a>
+        </div>
+      </form>
     </Container>
-  );
+  )
 }
 
-export default LoginForm;
+export default LoginForm

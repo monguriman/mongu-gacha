@@ -56,6 +56,7 @@ class userAuthService {
     const id = user.id;
     const name = user.name;
     const description = user.description;
+    const coin = user.coin;
 
     const loginUser = {
       token,
@@ -63,6 +64,7 @@ class userAuthService {
       email,
       name,
       description,
+      coin,
       errorMessage: null,
     };
 

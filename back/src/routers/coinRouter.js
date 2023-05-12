@@ -9,11 +9,9 @@ coinRouter.put(
   "/user/coin", // 경로 수정
   login_required,
   async function (req, res, next) {
-    console.log('라우터 들어옴');
     try {
       const userId = req.currentUserId;
       const { amount, operation } = req.body;
-  
       if (operation === 'add') {
         const result = await coinService.addCoin({ userId, amount });
         res.json({ coin: result.coin });

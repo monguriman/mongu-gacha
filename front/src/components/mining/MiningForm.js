@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import * as Api from '../../api'
-import { Button, Container, Row, Col, Card, Image } from 'react-bootstrap'
+import { Container, Card, Image } from 'react-bootstrap'
 import mining_1 from '../../images/mining_1.png'
 import mining_2 from '../../images/mining_2.png'
 import '../../styles/MiningForm.css'
@@ -14,8 +14,10 @@ function MiningForm() {
 
     const handleAddCoin = async () => {
         try {
+            const isCritical = Math.random() < 0.5 // 5% 확률로 true
+            const amount = isCritical ? 10 : 1
             const response = await Api.put('user/coin', {
-                amount: 1,
+                amount,
                 operation: 'add',
             })
             setCoin(response.data.coin)
@@ -29,14 +31,13 @@ function MiningForm() {
                 setAddText(false) // +1 텍스트 표시 비활성화
             }, 250)
 
-            // 5% 확률로 코인 10개 증가 및 "Critical!" 표시
-            if (Math.random() < 0.05) {
-                setCoin((prevCoin) => prevCoin + 9)
+            if (isCritical) {
                 setCriticalText(true)
                 setTimeout(() => {
                     setCriticalText(false)
                 }, 250)
             }
+
         } catch (error) {
             console.error(error)
         }

@@ -14,7 +14,7 @@ function MiningForm() {
 
     const handleAddCoin = async () => {
         try {
-            const response = await Api.put('coin', {
+            const response = await Api.put('user/coin', {
                 amount: 1,
                 operation: 'add',
             })

@@ -6,18 +6,19 @@ import { coinService } from "../services/coinService";
 const coinRouter = Router();
 
 coinRouter.put(
-  "/coin",
+  "/user/coin", // 경로 수정
   login_required,
   async function (req, res, next) {
+    console.log('라우터 들어옴');
     try {
-      const user_id = req.currentUserId;
+      const userId = req.currentUserId;
       const { amount, operation } = req.body;
   
       if (operation === 'add') {
-        const result = await coinService.addCoin({ user_id, amount });
+        const result = await coinService.addCoin({ userId, amount });
         res.json({ coin: result.coin });
       } else if (operation === 'deduct') {
-        const result = await coinService.deductCoin({ user_id, amount });
+        const result = await coinService.deductCoin({ userId, amount });
         res.json({ coin: result.coin });
       } else {
         res.status(400).json({ message: 'Invalid operation' });

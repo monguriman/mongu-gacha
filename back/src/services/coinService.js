@@ -1,19 +1,19 @@
 import { User } from "../db";
 
 class coinService {
-  static async addCoin({ user_id, amount }) {
-    const user = await User.findById({ user_id });
+  static async addCoin({ userId, amount }) {
+    const user = await User.findById({ userId });
     const fieldToUpdate = 'coin';
     const updatedCoin = user.coin + amount;
-    const coin = await User.update({ user_id, fieldToUpdate, newValue: updatedCoin })
+    const coin = await User.update({ userId, fieldToUpdate, newValue: updatedCoin })
     return coin;
   }
 
-  static async deductCoin({ user_id, amount }) {
-    const user = await User.findById({ user_id });
+  static async deductCoin({ userId, amount }) {
+    const user = await User.findById({ userId });
     const fieldToUpdate = 'coin';
     const updatedCoin = user.coin - amount;
-    const coin = await User.update({ user_id, fieldToUpdate, newValue: updatedCoin })
+    const coin = await User.update({ userId, fieldToUpdate, newValue: updatedCoin })
 
     return coin;
   }

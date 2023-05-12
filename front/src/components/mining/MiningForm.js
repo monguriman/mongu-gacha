@@ -14,8 +14,8 @@ function MiningForm() {
 
     const handleAddCoin = async () => {
         try {
-            const isCritical = Math.random() < 0.5 // 5% 확률로 true
-            const amount = isCritical ? 10 : 1
+            const isCritical = Math.random() < 0.05 // 5% 확률로 true
+            const amount = isCritical ? 10 : 1;
             const response = await Api.put('user/coin', {
                 amount,
                 operation: 'add',

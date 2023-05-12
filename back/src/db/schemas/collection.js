@@ -6,9 +6,9 @@ const CardSchema = new Schema(
       type: Number,
       required: true,
     },//고유한 카드넘버
-    cardAcquisitionTime: {
-      type: Date,
-      default: Date.now,
+    cardRarity: {
+      type: Number,
+      required: true,
     },
   },
   {

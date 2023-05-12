@@ -2,7 +2,7 @@ import { Router } from "express";
 import { login_required } from "../middlewares/login_required";
 import { totalCardService } from '../services/totalCardService';
 const totalCardRouter = Router();
-
+// 관리자가 카드 추가할때만 사용하는 라우터. 추후에 검증 기능 추가 필요함.
 // 전체 totalCard 조회
 totalCardRouter.get('/totalCard', async (req, res) => {
   try {

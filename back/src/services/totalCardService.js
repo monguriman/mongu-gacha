@@ -9,7 +9,6 @@ class totalCardService {
 
   // totalCard 추가
   static async create(totalCardData) {
-    console.log('서비스에서', totalCardData)
     const totalCard = await TotalCard.create(totalCardData);
     return totalCard;
   }

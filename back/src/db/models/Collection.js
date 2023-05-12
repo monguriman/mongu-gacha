@@ -8,7 +8,7 @@ class Collection {
     }
 
     // Collection 조회
-    static async get({ userId }) {
+    static async findById({ userId }) {
         const collection = await CollectionModel.findOne({ userId })
         return collection
     }

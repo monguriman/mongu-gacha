@@ -6,8 +6,6 @@ import { UserStateContext } from '../App'
 import * as Api from '../api'
 import '../styles/Home.css'
 
-
-
 function Portfolio() {
     const navigate = useNavigate()
     const params = useParams()
@@ -56,7 +54,6 @@ function Portfolio() {
 
     return (
         <>
-
             <div className="wrapper">
                 <a className="cta" onClick={() => navigate('/mining')}>
                     <span>채굴</span>
@@ -176,8 +173,6 @@ function Portfolio() {
                     </span>
                 </a>
             </div>
-
-
         </>
     )
 }

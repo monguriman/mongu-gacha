@@ -1,26 +1,34 @@
-import { User } from "../db";
+import { TotalCard } from "../db";
 
-class collectionService {
-  //카드 1장 뽑기
-  //5, 4, 3, 2성 (각각 3%(1장), 10%(3장), 47%(14장), 40%(12장)) 먼저 결정
-  //레어도 내의 카드 중 한장을 랜덤하게 뽑음
-
-  static async addcollection({ userId, amount }) {
-    const user = await User.findById({ userId });
-    const fieldToUpdate = 'collection';
-    const updatedcollection = user.collection + amount;
-    const collection = await User.update({ userId, fieldToUpdate, newValue: updatedcollection })
-    return collection;
+class totalCardService {
+  // 전체 totalCard 조회
+  static async findAll() {
+    const totalCards = await TotalCard.findAll({});
+    return totalCards;
   }
 
-  static async deductcollection({ userId, amount }) {
-    const user = await User.findById({ userId });
-    const fieldToUpdate = 'collection';
-    const updatedcollection = user.collection - amount;
-    const collection = await User.update({ userId, fieldToUpdate, newValue: updatedcollection })
+  // totalCard 추가
+  static async create(totalCardData) {
+    console.log('서비스에서', totalCardData)
+    const totalCard = await TotalCard.create(totalCardData);
+    return totalCard;
+  }
 
-    return collection;
+  // totalCard 수정
+  static async update(totalCardNumber, updatedData) {
+    const totalCard = await TotalCard.update(
+      { totalCardNumber },
+      updatedData,
+      { new: true }
+    );
+    return totalCard;
+  }
+
+  // totalCard 삭제
+  static async delete(totalCardNumber) {
+    const deletedTotalCard = await TotalCard.delete({ totalCardNumber });
+    return deletedTotalCard;
   }
 }
 
-export { collectionService };
+export { totalCardService };

@@ -1,13 +1,29 @@
 import { Schema, model } from "mongoose";
-import CardSchema from './card.js';
+
+const CardSchema = new Schema(
+  {
+    cardNumber: {
+      type: Number,
+      required: true,
+    },//고유한 카드넘버
+    cardAcquisitionTime: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const CollectionSchema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
+      unique: true,
     },
-    card: [CardSchema]
+    card: [CardSchema],
   },
   {
     timestamps: true,

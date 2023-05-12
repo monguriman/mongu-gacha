@@ -54,7 +54,8 @@ function Portfolio() {
 
     return (
         <>
-            <div className="wrapper">
+            <div className="wrapper" style= {{ marginTop: '230px' }}>
+            
                 <a className="cta" onClick={() => navigate('/mining')}>
                     <span>채굴</span>
                     <span>

@@ -11,7 +11,7 @@ function Header() {
     const dispatch = useContext(DispatchContext)
 
     // 코인 값 상태를 로컬 상태로 관리
-    const [coin, setCoin] = useState(userState.user?.coin || 0)
+    const [coin, setCoin] = useState(userState.coin || 0)
 
     // 전역 상태(userState.user.coin)가 변경될 때마다 로컬 상태 업데이트
     useEffect(() => {

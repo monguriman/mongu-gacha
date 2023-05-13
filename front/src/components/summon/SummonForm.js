@@ -1,9 +1,11 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import * as Api from '../../api'
-import { Container, Row, Button, Modal } from 'react-bootstrap'
-import { UserStateContext } from '../../App'
+import { Container, Button, Modal } from 'react-bootstrap'
+import { UserStateContext, DispatchContext } from '../../App'
 
 function SummonForm() {
+    const dispatch = useContext(DispatchContext);
+
     const userState = useContext(UserStateContext)
     const [modalShow, setModalShow] = useState(false)
     const [drewCard, setDrewCard] = useState(null)
@@ -11,6 +13,7 @@ function SummonForm() {
     const handleSummon = async () => {
         try {
             const response = await Api.put(`summon/${userState.user._id}`)
+            await Api.get('user/current').then( (res) => dispatch({type: 'UPDATE_COIN', payload: res.data.coin}));
             const card = response.data
             setDrewCard(card)
             console.log('뽑은카드정보', response.data)

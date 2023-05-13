@@ -14,10 +14,9 @@ export function loginReducer(userState, action) {
             }
         case 'UPDATE_COIN':
             console.log('%c코인 값 변동!', 'color: #d93d1a;')
-            console.log(action.coin);
             return {
                 ...userState,
-                coin: action.coin,
+                coin: action.payload,
             }
         default:
             return userState

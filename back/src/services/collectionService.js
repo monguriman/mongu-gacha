@@ -49,7 +49,7 @@ class collectionService {
             // 코인 차감
             await coinService.deductCoin({ userId, amount: 30 })
 
-            return createdCollection.card[0]
+            return cardToAdd;
         }
 
         //collection내의 card 배열에 selectedCard를 추가
@@ -59,7 +59,19 @@ class collectionService {
         // 코인 차감
         await coinService.deductCoin({ userId, amount: 30 })//뽑기 1회당 가격
 
-        return cardToAdd
+        return cardToAdd;
+    }
+
+    //유저의 현재 도감정보 가져오기
+    static async getCollection({ userId }) {
+        const collection = await Collection.findById({ userId });
+
+        if (!collection) {
+            const errorMessage = '유저는 아무런 카드를 가지고 있지 않습니다.';
+            return { errorMessage };
+        }
+
+        return collection;
     }
 }
 

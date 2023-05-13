@@ -104,7 +104,10 @@ function MiningForm() {
                         <Image src={mining_1} alt="Image 1" width="50%" fluid />
                     ) : (
                         <Image src={mining_2} alt="Image 2" width="50%" fluid />
-                    )}
+                    )} 
+                    <div style={{ fontSize:'11px'}}>
+                        * 채굴 버튼 1회당 1개의 코인을 얻을 수 있습니다. <br />* 5%의 확률로 10개의 코인을 얻을 수 있는 크리티컬이 발생합니다.
+                    </div>
                 </Card.Body>
             </Card>
         </Container>

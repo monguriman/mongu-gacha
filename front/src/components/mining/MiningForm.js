@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { UserStateContext, DispatchContext } from '../../App';
+
 import * as Api from '../../api'
 import { Container, Card, Image } from 'react-bootstrap'
 import mining_1 from '../../images/mining_1.png'
@@ -6,6 +8,9 @@ import mining_2 from '../../images/mining_2.png'
 import '../../styles/MiningForm.css'
 
 function MiningForm() {
+    const userState = useContext(UserStateContext);
+    const dispatch = useContext(DispatchContext);
+
     const [coin, setCoin] = useState(null)
     const [imageNumber, setImageNumber] = useState(1)
     const [shimmer, setShimmer] = useState(false)
@@ -20,7 +25,8 @@ function MiningForm() {
                 amount,
                 operation: 'add',
             })
-            setCoin(response.data.coin)
+            setCoin(response.data.coin);
+            dispatch({ type: 'UPDATE_COIN', coin: response.data.coin });
             setImageNumber((prevImageNumber) => (prevImageNumber === 1 ? 2 : 1))
             setShimmer(true) // 반짝임 활성화
             setTimeout(() => {

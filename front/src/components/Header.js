@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
@@ -7,10 +7,16 @@ import { UserStateContext, DispatchContext } from '../App'
 function Header() {
     const navigate = useNavigate()
     const location = useLocation()
-
     const userState = useContext(UserStateContext)
     const dispatch = useContext(DispatchContext)
 
+    // 코인 값 상태를 로컬 상태로 관리
+    const [coin, setCoin] = useState(userState.user?.coin || 0)
+
+    // 전역 상태(userState.user.coin)가 변경될 때마다 로컬 상태 업데이트
+    useEffect(() => {
+        setCoin(userState.coin)
+    }, [userState.coin])
     // 전역상태에서 user가 null이 아니라면 로그인 성공 상태임.
     const isLogin = !!userState.user
 
@@ -52,7 +58,7 @@ function Header() {
                                 <p style={{ marginBottom: '5px' }}>
                                     Lv.1 {portfolioOwner.name}
                                 </p>
-                                <p>코인 소지량 {portfolioOwner.coin}</p>
+                                <p>코인 소지량 {coin}</p>
                             </div>
                         )}
                     </div>

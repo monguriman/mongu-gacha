@@ -20,7 +20,7 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min //최댓값도 포함, 최솟값도 포함
 }
 
-class collectionService {
+class summonService {
     //카드 1장 뽑기
     //5, 4, 3, 2성 (각각 3%(1장), 10%(3장), 47%(14장), 40%(12장)) 먼저 결정
     //레어도 내의 카드 중 한장을 랜덤하게 뽑음
@@ -73,4 +73,4 @@ class collectionService {
     }
 }
 
-export { collectionService }
+export { summonService }

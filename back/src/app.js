@@ -4,7 +4,7 @@ import express from "express";
 import { userAuthRouter } from "./routers/userRouter";
 import { coinRouter } from "./routers/coinRouter";
 import { totalCardRouter } from "./routers/totalCardRouter";
-import { collectionRouter } from "./routers/collectionRouter";
+import { summonRouter } from "./routers/summonRouter";
 
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 
@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 app.use(userAuthRouter);
 app.use(coinRouter);
 app.use(totalCardRouter);
-app.use(collectionRouter);
+app.use(summonRouter);
 
 // 순서 중요 (router 에서 next() 시 아래의 에러 핸들링  middleware로 전달됨)
 app.use(errorMiddleware);

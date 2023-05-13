@@ -10,7 +10,7 @@ function SummonForm() {
 
     const handleSummon = async () => {
         try {
-            const response = await Api.put(`collection/${userState.user._id}`)
+            const response = await Api.put(`summon/${userState.user._id}`)
             const card = response.data
             setDrewCard(card)
             console.log('뽑은카드정보', response.data)

@@ -25,6 +25,10 @@ class collectionService {
     //5, 4, 3, 2성 (각각 3%(1장), 10%(3장), 47%(14장), 40%(12장)) 먼저 결정
     //레어도 내의 카드 중 한장을 랜덤하게 뽑음
     static async drawAndAddOneCard({ userId }) {
+        
+        // 코인 차감
+        await coinService.deductCoin({ userId, amount: 30 })//뽑기 1회당 가격
+
         const rarity = getRarity()
         console.log(rarity, '성 등장!')
         const candidateCards = await TotalCard.findByRarity(rarity)
@@ -46,18 +50,12 @@ class collectionService {
             createdCollection.card.push(cardToAdd)
             await createdCollection.save()
 
-            // 코인 차감
-            await coinService.deductCoin({ userId, amount: 30 })
-
             return cardToAdd;
         }
 
         //collection내의 card 배열에 selectedCard를 추가
         collection.card.push(cardToAdd)
         await collection.save()
-
-        // 코인 차감
-        await coinService.deductCoin({ userId, amount: 30 })//뽑기 1회당 가격
 
         return cardToAdd;
     }

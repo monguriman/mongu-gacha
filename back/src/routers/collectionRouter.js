@@ -12,7 +12,7 @@ collectionRouter.put('/collection/:id', async (req, res) => {
         const cardDrew = await collectionService.drawAndAddOneCard({ userId });
         res.json(cardDrew)
     } catch (error) {
-        res.status(500).json({ error: '카드 뽑기에 실패했습니다.' })
+        res.status(400).json({ error: '카드 뽑기에 실패했습니다.' })
     }
 })
 
@@ -24,7 +24,7 @@ collectionRouter.get('/collection/:id', async (req, res) => {
         const collection = await collectionService.getCollection({ userId });
         res.json(collection)
     } catch (error) {
-        res.status(500).json({ error: '유저의 도감 조회에 실패했습니다.' })
+        res.status(400).json({ error: '유저의 도감 조회에 실패했습니다.' })
     }
 })
 

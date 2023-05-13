@@ -54,7 +54,7 @@ function Portfolio() {
 
     return (
         <>
-            <div className="wrapper" style= {{ marginTop: '230px' }}>
+            <div className="wrapper" style= {{ marginTop: '150px' }}>
             
                 <a className="cta" onClick={() => navigate('/mining')}>
                     <span>채굴</span>
@@ -96,7 +96,7 @@ function Portfolio() {
             </div>
             <br />
             <div className="wrapper">
-                <a className="cta" href="#">
+                <a className="cta" href="/summon">
                     <span>소환</span>
                     <span>
                         <svg

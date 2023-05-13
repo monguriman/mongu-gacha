@@ -11,7 +11,7 @@ import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
 
 import MiningForm from './components/mining/MiningForm';
-
+import SummonForm from './components/summon/SummonForm.js';
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
 
@@ -65,6 +65,7 @@ function App() {
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/users/:userId" element={<Portfolio />} />
             <Route path="/mining" element={<MiningForm />} />
+            <Route path="/summon" element={<SummonForm />} />
             <Route path="/network" element={<Network />} />
             <Route path="*" element={<Portfolio />} />
           </Routes>

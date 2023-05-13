@@ -52,14 +52,14 @@ class userAuthService {
         const token = jwt.sign({ userId: user._id }, secretKey);
 
         // 반환할 loginuser 객체를 위한 변수 설정
-        const id = user._id;
+        const _id = user._id;
         const name = user.name;
         const description = user.description;
         const coin = user.coin;
 
         const loginUser = {
             token,
-            id,
+            _id,
             email,
             name,
             description,

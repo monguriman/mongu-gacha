@@ -68,7 +68,7 @@ function LoginForm() {
         navigate('/login');
         return;
     } else {
-        navigate(`/user/${userState.user.id ?? userState.user.id}`);
+        navigate(`/user/${userState.user._id ?? userState.user._id}`);
     }
 }, [userState, navigate]);
 

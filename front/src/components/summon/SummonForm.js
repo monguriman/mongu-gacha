@@ -12,8 +12,7 @@ function SummonForm() {
 
     const handleSummon = async () => {
         try {
-            const response = await Api.put(`summon/${userState.user._id}`)
-            await Api.get('user/current').then( (res) => dispatch({type: 'UPDATE_COIN', payload: res.data}));
+            const response = await Api.put(`user/summon`)
             const card = response.data
             setDrewCard(card)
             console.log('뽑은카드정보', response.data)

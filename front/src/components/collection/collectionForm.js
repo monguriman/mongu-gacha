@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { DispatchContext } from '../../App'
 
 import * as Api from '../../api'
-import { Container, Card, Image } from 'react-bootstrap'
+import { Container, Card, Image, Row } from 'react-bootstrap'
 import '../../styles/MiningForm.css'
 
 function CollectionForm() {
@@ -14,7 +14,7 @@ function CollectionForm() {
         const fetchTotalCards = async () => {
             try {
                 const response = await Api.get('totalCard')
-                console.log('토탈카드', response.data);
+                console.log('토탈카드', response.data)
                 setTotalCards(response.data)
             } catch (error) {
                 console.error('Error fetching totalCards:', error)
@@ -49,19 +49,29 @@ function CollectionForm() {
     const renderSortedCards = () => {
         const sortedCards = sortByTotalCardNumber(totalCards)
         return sortedCards.map((card) => (
-            <div key={card._id}>
-                <p>카드 번호: {card.totalCardNumber}</p>
-                <p>카드 등급: {card.rarity}</p>
+            <Card className="mb-5 ms-5 mr-5" style={{ width: '18rem', height: '10rem', borderRadius: '18px' }}>
+                <Card.Body>
+                <Row className="justify-content-md-center">
+                <p>
+                    카드 번호: {card.totalCardNumber} <br />
+                    등급: {card.rarity}
+                </p>
                 {isCardOwned(card.totalCardNumber) && <p>보유중</p>}
-            </div>
+                </Row>
+                </Card.Body>
+            </Card>
         ))
     }
 
     return (
-        <div>
-            <h2>Total Cards</h2>
-            {renderSortedCards()}
-        </div>
+        <>
+        <h2>Total Cards</h2>
+        <Container fluid className="pt-4">
+            <Row xs="auto" className="justify-content-center">
+                {renderSortedCards()}
+            </Row>
+        </Container>
+        </>
     )
 }
 

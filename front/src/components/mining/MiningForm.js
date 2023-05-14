@@ -18,14 +18,19 @@ function MiningForm() {
 
     const handleAddCoin = async () => {
         try {
-            const isCritical = Math.random() < 0.05 // 5% 확률로 true
+            const isCritical = Math.random() < 0.30 // 5% 확률로 true
             const amount = isCritical ? 10 : 1;
             const response = await Api.put('user/coin', {
                 amount,
                 operation: 'add',
             })
             setCoin(response.data.coin);
-            dispatch({ type: 'UPDATE_COIN', payload: response.data.coin });
+            const user = response.data
+            console.log(user);
+            dispatch({
+                type: 'UPDATE_COIN',
+                payload: user
+            })
             setImageNumber((prevImageNumber) => (prevImageNumber === 1 ? 2 : 1))
             setShimmer(true) // 반짝임 활성화
             setTimeout(() => {

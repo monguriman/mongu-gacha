@@ -6,7 +6,7 @@ import { coinService } from "../services/coinService";
 const coinRouter = Router();
 
 coinRouter.put(
-  "/user/coin", // 경로 수정
+  "/user/coin",
   login_required,
   async function (req, res, next) {
     try {
@@ -14,10 +14,11 @@ coinRouter.put(
       const { amount, operation } = req.body;
       if (operation === 'add') {
         const result = await coinService.addCoin({ userId, amount });
-        res.json({ coin: result.coin });
+        res.json(result);
+
       } else if (operation === 'deduct') {
         const result = await coinService.deductCoin({ userId, amount });
-        res.json({ coin: result.coin });
+        res.json(result);
       } else {
         res.status(400).json({ message: 'Invalid operation' });
       }

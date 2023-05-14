@@ -16,7 +16,7 @@ export function loginReducer(userState, action) {
             console.log('%c코인 값 변동!', 'color: #d93d1a;')
             return {
                 ...userState,
-                coin: action.payload,
+                user: action.payload,
             }
         default:
             return userState

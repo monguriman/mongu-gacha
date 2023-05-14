@@ -5,8 +5,8 @@ class coinService {
     const user = await User.findById({ userId });
     const fieldToUpdate = 'coin';
     const updatedCoin = user.coin + amount;
-    const coin = await User.update({ userId, fieldToUpdate, newValue: updatedCoin })
-    return coin;
+    const updatedUser = await User.update({ userId, fieldToUpdate, newValue: updatedCoin }) 
+    return updatedUser;
   }
 
   static async deductCoin({ userId, amount }) {

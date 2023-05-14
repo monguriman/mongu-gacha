@@ -67,7 +67,15 @@ function Header() {
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link
-                        onClick={() => navigate('/network')}
+                        onClick={() => navigate('/summon')}
+                        style={{ color: '#FFFFFF', fontWeight: '500' }}
+                    >
+                        소환
+                    </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link
+                        onClick={() => navigate('/collection')}
                         style={{ color: '#FFFFFF', fontWeight: '500' }}
                     >
                         도감

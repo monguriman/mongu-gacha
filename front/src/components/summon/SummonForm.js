@@ -5,7 +5,6 @@ import { UserStateContext, DispatchContext } from '../../App'
 
 function SummonForm() {
     const dispatch = useContext(DispatchContext);
-
     const userState = useContext(UserStateContext)
     const [modalShow, setModalShow] = useState(false)
     const [drewCard, setDrewCard] = useState(null)
@@ -15,8 +14,15 @@ function SummonForm() {
             const response = await Api.put(`user/summon`)
             const card = response.data
             setDrewCard(card)
-            console.log('뽑은카드정보', response.data)
             setModalShow(true)
+
+            const userData = await Api.get('user/current');
+            const user = userData.data;
+            dispatch({
+                type: 'UPDATE_COIN',
+                payload: user
+            })
+
         } catch (err) {
             if (err.response.status === 400) {
                 alert(err.response.data.error)

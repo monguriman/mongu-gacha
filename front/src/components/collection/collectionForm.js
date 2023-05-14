@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { DispatchContext } from '../../App'
 
 import * as Api from '../../api'
-import { Container, Card, Image, Row } from 'react-bootstrap'
+import { Container, Card, Row } from 'react-bootstrap'
 import '../../styles/MiningForm.css'
 
 function CollectionForm() {
+    const getCardCount = (cardNumber) => {
+        return userCards.filter((card) => card.cardNumber === cardNumber).length
+    }
+
     const [totalCards, setTotalCards] = useState([])
     const [userCards, setUserCards] = useState([])
 
@@ -49,15 +52,24 @@ function CollectionForm() {
     const renderSortedCards = () => {
         const sortedCards = sortByTotalCardNumber(totalCards)
         return sortedCards.map((card) => (
-            <Card className="mb-5 ms-5 mr-5" style={{ width: '18rem', height: '10rem', borderRadius: '18px' }}>
+            <Card
+                className="mb-5 ms-5 mr-5"
+                style={{
+                    width: '18rem',
+                    height: '10rem',
+                    borderRadius: '18px',
+                }}
+            >
                 <Card.Body>
-                <Row className="justify-content-md-center">
-                <p>
-                    카드 번호: {card.totalCardNumber} <br />
-                    등급: {card.rarity}
-                </p>
-                {isCardOwned(card.totalCardNumber) && <p>보유중</p>}
-                </Row>
+                    <Row className="justify-content-md-center">
+                        <p>
+                            카드 번호: {card.totalCardNumber} <br />
+                            등급: {card.rarity}
+                        </p>
+                        {isCardOwned(card.totalCardNumber) && (
+                            <p>{getCardCount(card.totalCardNumber)}장 보유중</p>
+                        )}
+                    </Row>
                 </Card.Body>
             </Card>
         ))
@@ -65,12 +77,12 @@ function CollectionForm() {
 
     return (
         <>
-        <h2>Total Cards</h2>
-        <Container fluid className="pt-4">
-            <Row xs="auto" className="justify-content-center">
-                {renderSortedCards()}
-            </Row>
-        </Container>
+            <h2>Total Cards</h2>
+            <Container fluid className="pt-4">
+                <Row xs="auto" className="justify-content-center">
+                    {renderSortedCards()}
+                </Row>
+            </Container>
         </>
     )
 }

@@ -1,10 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext,  } from 'react'
 
 import * as Api from '../../api'
-import { Container, Card, Row } from 'react-bootstrap'
+import { Container, Card, Row, Image } from 'react-bootstrap'
 import '../../styles/MiningForm.css'
 
+import images from '../../images/imageIndex'
+
 function CollectionForm() {
+    const card_1 = images.card_1;
+
     const getCardCount = (cardNumber) => {
         return userCards.filter((card) => card.cardNumber === cardNumber).length
     }
@@ -78,6 +82,7 @@ function CollectionForm() {
     return (
         <>
             <h2>Total Cards</h2>
+            <Image src={card_1} alt="Image 1" width="50%" fluid />
             <Container fluid className="pt-4">
                 <Row xs="auto" className="justify-content-center">
                     {renderSortedCards()}

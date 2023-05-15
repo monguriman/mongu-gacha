@@ -1,2 +1,5 @@
 # dependencies
 node_modules
+
+# Ignore .jpg files
+*.jpg

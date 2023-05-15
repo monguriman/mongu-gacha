@@ -13,7 +13,7 @@ summonRouter.put('/user/summon', login_required, async (req, res, next) => {
         const cardDrew = await summonService.drawAndAddOneCard({ userId });
         res.json(cardDrew)
     } catch (error) {
-        res.status(400).json({ error: '카드 뽑기에 실패했습니다.' })
+        res.status(400).json({ error: '코인이 부족합니다.' })
     }
 })
 

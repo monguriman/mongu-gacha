@@ -85,7 +85,7 @@ function MiningForm() {
         <Container className="d-flex align-items-center justify-content-center vh-100">
             <Card style={{ width: '360px' }} className="text-center">
                 <Card.Body>
-                    <div ontouchstart="">
+                    <div onTouchStart="">
                         <button
                             className="miningButton"
                             onMouseDown={handleAddCoin}

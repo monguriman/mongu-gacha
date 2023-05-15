@@ -81,6 +81,14 @@ function Header() {
                         도감
                     </Nav.Link>
                 </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link
+                        onClick={() => navigate('/Maze')}
+                        style={{ color: '#FFFFFF', fontWeight: '500' }}
+                    >
+                        미로
+                    </Nav.Link>
+                </Nav.Item>
                 {isLogin && (
                     <Nav.Item>
                         <Nav.Link

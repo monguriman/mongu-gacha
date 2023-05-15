@@ -7,7 +7,6 @@ const summonRouter = Router()
 // 카드 1회 뽑기
 summonRouter.put('/user/summon', login_required, async (req, res, next) => {
     try {
-        console.log(req.currentUserId)
         // URI로부터 사용자 id를 추출함.
         const userId = req.currentUserId;
         const cardDrew = await summonService.drawAndAddOneCard({ userId });

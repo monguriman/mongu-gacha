@@ -1,0 +1,32 @@
+.summon-button {
+    font-size: 80px;
+    height: 150px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.summon-button:hover {
+    transform: scale(1.1);
+}
+
+.modal-dialog.modal-card-reveal-animation {
+    animation-name: card-reveal;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 2s; /* 카드 결과가 나타날 때까지의 대기 시간 */
+}
+
+@keyframes card-reveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}

@@ -26,7 +26,6 @@ function MiningForm() {
             })
             setCoin(response.data.coin);
             const user = response.data
-            console.log(user);
             dispatch({
                 type: 'UPDATE_COIN',
                 payload: user

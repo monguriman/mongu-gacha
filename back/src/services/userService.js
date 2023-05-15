@@ -22,7 +22,6 @@ class userAuthService {
         createdNewUser.errorMessage = null; // 문제 없이 db 저장 완료되었으므로 에러가 없음.
 
         const createdId = createdNewUser._id.toString()
-        console.log(createdId)
         // 유저의 빈 콜렉션도 생성
         const createdCollection = await Collection.create({ userId: createdId });
 

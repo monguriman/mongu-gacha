@@ -51,7 +51,6 @@ function CollectionForm() {
         const fetchTotalCards = async () => {
             try {
                 const response = await Api.get('totalCard')
-                console.log('토탈카드', response.data)
                 setTotalCards(response.data)
             } catch (error) {
                 console.error('Error fetching totalCards:', error)

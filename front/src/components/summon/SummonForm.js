@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react'
 import * as Api from '../../api'
 import { Container, Button, Modal } from 'react-bootstrap'
 import { UserStateContext, DispatchContext } from '../../App'
-
+import '../../styles/SummonForm.css'
 function SummonForm() {
-    const dispatch = useContext(DispatchContext);
+    const dispatch = useContext(DispatchContext)
     const userState = useContext(UserStateContext)
     const [modalShow, setModalShow] = useState(false)
     const [drewCard, setDrewCard] = useState(null)
@@ -16,25 +16,26 @@ function SummonForm() {
             setDrewCard(card)
             setModalShow(true)
 
-            const userData = await Api.get('user/current');
-            const user = userData.data;
+            const userData = await Api.get('user/current')
+            const user = userData.data
             dispatch({
                 type: 'UPDATE_COIN',
-                payload: user
+                payload: user,
             })
-
         } catch (err) {
             if (err.response.status === 400) {
                 alert(err.response.data.error)
             }
-            console.log(err.response);
+            console.log(err.response)
             console.log('코인이 부족합니다.', err)
         }
     }
 
     return (
-        <Container style={{ fontSize: '80px', color: 'white' }}>
-            <Button onClick={handleSummon}>소환</Button>
+        <Container>
+            <Button className="summon-button" onClick={handleSummon}>
+                소환
+            </Button>
 
             <Modal show={modalShow} onHide={() => setModalShow(false)}>
                 <Modal.Header closeButton>
@@ -42,7 +43,7 @@ function SummonForm() {
                 </Modal.Header>
                 <Modal.Body>
                     {drewCard && (
-                        <div>
+                        <div className="modal-card-reveal-animation">
                             <p>카드번호 : {drewCard.cardNumber}</p>
                             <p>희귀도 : {drewCard.cardRarity}</p>
                         </div>

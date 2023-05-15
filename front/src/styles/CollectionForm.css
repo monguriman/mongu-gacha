@@ -1,0 +1,11 @@
+.card-image.not-owned {
+    filter: blur(8px) grayscale();
+    opacity: 0.5;
+
+    
+}
+
+.card-image.not-owned img {
+    filter: none;
+    opacity: 1;
+}

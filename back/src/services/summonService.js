@@ -44,15 +44,6 @@ class summonService {
             cardRarity: selectedCard.rarity,
         }
 
-        //유저의 collection을 찾아서 없다면 최초 1회 collection 생성 후 거기에 추가
-        if (!collection) {
-            const createdCollection = await Collection.create({ userId })
-            createdCollection.card.push(cardToAdd)
-            await createdCollection.save()
-
-            return cardToAdd;
-        }
-
         //collection내의 card 배열에 selectedCard를 추가
         collection.card.push(cardToAdd)
         await collection.save()

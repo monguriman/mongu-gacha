@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 
 import * as Api from '../../api'
 import { Container, Card, Row, Image } from 'react-bootstrap'
-import '../../styles/MiningForm.css'
-
+import '../../styles/CollectionForm.css'
 import images from '../../images/imageIndex'
 
 function CollectionForm() {
@@ -92,7 +91,7 @@ function CollectionForm() {
 
             return (
                 <Card
-                    className="mb-5 ms-5 mr-5"
+                    className={`mb-5 ms-5 mr-5 ${isCardOwned(card.totalCardNumber) ? 'owned' : 'not-owned'}`}
                     style={{
                         width: '18rem',
                         height: '36rem',
@@ -112,17 +111,19 @@ function CollectionForm() {
                                     </p>
                                 )}
                             </div>
-                            <div className="card-image">
+                            <div className={`card-image ${isCardOwned(card.totalCardNumber) ? '' : 'not-owned'}`}>
                                 <Image
                                     src={cardImage}
                                     alt={`Image ${card.totalCardNumber}`}
                                     fluid
+                                    className={`${isCardOwned(card.totalCardNumber) ? '' : 'not-owned'}`}
                                 />
                             </div>
                         </Row>
                     </Card.Body>
                 </Card>
-            )
+            );
+            
         })
     }
 

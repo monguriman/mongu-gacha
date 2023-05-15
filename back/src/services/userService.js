@@ -1,4 +1,4 @@
-import { User, Comment } from '../db'; // from을 폴더(db) 로 설정 시, 디폴트로 index.js 로부터 import함.
+import { User, Comment, Collection } from '../db'; // from을 폴더(db) 로 설정 시, 디폴트로 index.js 로부터 import함.
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -20,6 +20,11 @@ class userAuthService {
         // db에 저장
         const createdNewUser = await User.create({ newUser });
         createdNewUser.errorMessage = null; // 문제 없이 db 저장 완료되었으므로 에러가 없음.
+
+        const createdId = createdNewUser._id.toString()
+        console.log(createdId)
+        // 유저의 빈 콜렉션도 생성
+        const createdCollection = await Collection.create({ userId: createdId });
 
         return createdNewUser;
     }

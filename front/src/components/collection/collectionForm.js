@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext,  } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 import * as Api from '../../api'
 import { Container, Card, Row, Image } from 'react-bootstrap'
@@ -7,7 +7,38 @@ import '../../styles/MiningForm.css'
 import images from '../../images/imageIndex'
 
 function CollectionForm() {
-    const card_1 = images.card_1;
+    const {
+        card_1,
+        card_2,
+        card_3,
+        card_4,
+        card_5,
+        card_6,
+        card_7,
+        card_8,
+        card_9,
+        card_10,
+        card_11,
+        card_12,
+        card_13,
+        card_14,
+        card_15,
+        card_16,
+        card_17,
+        card_18,
+        card_19,
+        card_20,
+        card_21,
+        card_22,
+        card_23,
+        card_24,
+        card_25,
+        card_26,
+        card_27,
+        card_28,
+        card_29,
+        card_30,
+    } = images
 
     const getCardCount = (cardNumber) => {
         return userCards.filter((card) => card.cardNumber === cardNumber).length
@@ -55,34 +86,49 @@ function CollectionForm() {
     // 정렬된 카드 목록을 출력하는 함수
     const renderSortedCards = () => {
         const sortedCards = sortByTotalCardNumber(totalCards)
-        return sortedCards.map((card) => (
-            <Card
-                className="mb-5 ms-5 mr-5"
-                style={{
-                    width: '18rem',
-                    height: '10rem',
-                    borderRadius: '18px',
-                }}
-            >
-                <Card.Body>
-                    <Row className="justify-content-md-center">
-                        <p>
-                            카드 번호: {card.totalCardNumber} <br />
-                            등급: {card.rarity}
-                        </p>
-                        {isCardOwned(card.totalCardNumber) && (
-                            <p>{getCardCount(card.totalCardNumber)}장 보유중</p>
-                        )}
-                    </Row>
-                </Card.Body>
-            </Card>
-        ))
+        return sortedCards.map((card) => {
+            // Get the corresponding card image based on card number
+            const cardImage = images[`card_${card.totalCardNumber}`]
+
+            return (
+                <Card
+                    className="mb-5 ms-5 mr-5"
+                    style={{
+                        width: '18rem',
+                        height: '36rem',
+                        borderRadius: '18px',
+                    }}
+                    key={card.totalCardNumber}
+                >
+                    <Card.Body>
+                        <Row className="justify-content-md-center">
+                            <div className="card-info">
+                                <p>카드 번호: {card.totalCardNumber}</p>
+                                <p>등급: {card.rarity}</p>
+                                {isCardOwned(card.totalCardNumber) && (
+                                    <p>
+                                        {getCardCount(card.totalCardNumber)}장
+                                        보유중
+                                    </p>
+                                )}
+                            </div>
+                            <div className="card-image">
+                                <Image
+                                    src={cardImage}
+                                    alt={`Image ${card.totalCardNumber}`}
+                                    fluid
+                                />
+                            </div>
+                        </Row>
+                    </Card.Body>
+                </Card>
+            )
+        })
     }
 
     return (
         <>
             <h2>Total Cards</h2>
-            <Image src={card_1} alt="Image 1" width="50%" fluid />
             <Container fluid className="pt-4">
                 <Row xs="auto" className="justify-content-center">
                     {renderSortedCards()}

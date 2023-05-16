@@ -3,11 +3,47 @@ import * as Api from '../../api'
 import { Container, Button, Modal } from 'react-bootstrap'
 import { UserStateContext, DispatchContext } from '../../App'
 import '../../styles/SummonForm.css'
+
+import images from '../../images/imageIndex'
+
 function SummonForm() {
     const dispatch = useContext(DispatchContext)
     const userState = useContext(UserStateContext)
     const [modalShow, setModalShow] = useState(false)
     const [drewCard, setDrewCard] = useState(null)
+
+    const {
+        card_1,
+        card_2,
+        card_3,
+        card_4,
+        card_5,
+        card_6,
+        card_7,
+        card_8,
+        card_9,
+        card_10,
+        card_11,
+        card_12,
+        card_13,
+        card_14,
+        card_15,
+        card_16,
+        card_17,
+        card_18,
+        card_19,
+        card_20,
+        card_21,
+        card_22,
+        card_23,
+        card_24,
+        card_25,
+        card_26,
+        card_27,
+        card_28,
+        card_29,
+        card_30,
+    } = images
 
     const handleSummon = async () => {
         try {
@@ -31,6 +67,11 @@ function SummonForm() {
         }
     }
 
+    const getCardImage = (cardNumber) => {
+        // 카드 번호에 해당하는 이미지 경로를 가져옴
+        return images[`card_${cardNumber}`]
+    }
+
     return (
         <Container>
             <Button className="summon-button" onClick={handleSummon}>
@@ -44,8 +85,18 @@ function SummonForm() {
                 <Modal.Body>
                     {drewCard && (
                         <div className="modal-card-reveal-animation">
-                            <p>카드번호 : {drewCard.cardNumber}</p>
-                            <p>희귀도 : {drewCard.cardRarity}</p>
+                            <p>카드번호: {drewCard.cardNumber}</p>
+                            <p>희귀도: {drewCard.cardRarity}</p>
+                            <img
+                                src={getCardImage(drewCard.cardNumber)}
+                                alt={`Card ${drewCard.cardNumber}`}
+                                style={{
+                                    scale: '0.7',
+                                    borderRadius: '15px',
+                                    maxWidth: '100%',
+                                    maxHeight: '100%',
+                                }}
+                            />
                         </div>
                     )}
                 </Modal.Body>

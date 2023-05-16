@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Wheel } from 'react-custom-roulette'
-import { DispatchContext, UserStateContext } from '../../App'
-import { Modal, Button } from 'react-bootstrap'
+import { DispatchContext } from '../../App'
+import { Modal, Button, Container } from 'react-bootstrap'
 import * as Api from '../../api'
 
 const data = [{ option: 'RED' }, { option: 'BLUE' }]
@@ -15,14 +15,11 @@ function RouletteForm() {
     const [betColor, setBetColor] = useState('')
     const [resultMessage, setResultMessage] = useState('')
     const [isResultVisible, setIsResultVisible] = useState(false)
-    const [coin, setCoin] = useState(0) // 유저의 보유 코인 상태값 추가
-    const [user, setUser] = useState(null)
+    const [coin, setCoin] = useState(0)
 
     const handleSpinClick = async () => {
         if (!mustSpin && betAmount && betColor) {
             // 유저의 보유 코인과 베팅 금액을 비교하여 코인이 부족한 경우 에러 메시지 표시
-            console.log('스타트코인', coin)
-            console.log('벳어마운트', betAmount)
             if (parseInt(betAmount) > coin || coin == 0) {
                 setResultMessage('코인이 부족합니다.')
                 setIsResultVisible(true)
@@ -42,8 +39,6 @@ function RouletteForm() {
                 //먼저 베팅한 코인을 차감한다
                 const res = await Api.put('user/coin', requestBody)
                 const user = res.data
-                setUser(user)
-                console.log('코인차감', user)
                 //상단바에 차감이 즉각 반영되도록 전역 반영
                 dispatch({
                     type: 'UPDATE_COIN',
@@ -58,13 +53,10 @@ function RouletteForm() {
                         operation: 'add',
                     }
                     try {
-                        //게임에서 이겼다면 베팅한 코인 * 2 의 금액을 코인에 Add한다
-                        const res = await Api.put('user/coin', addRequestBody)
-                        const user = res.data
-                        console.log('이겨서 유저 설정함', user)
-                        setUser(user)
+                        await Api.put('user/coin', addRequestBody)
+
                         setResultMessage(
-                            `축하합니다! 베팅한 코인의 2배인 ${betAmount*2} 코인을 얻었습니다.`
+                            `축하합니다! ${addAmount} 코인을 얻었습니다.`
                         )
                     } catch (error) {
                         console.log(error)
@@ -93,10 +85,6 @@ function RouletteForm() {
     }, [betAmount, betColor])
 
     useEffect(() => {
-        console.log(mustSpin)
-    }, [mustSpin])
-
-    useEffect(() => {
         // 유저의 보유 코인 가져오기
         Api.get('user/current')
             .then((response) => {
@@ -116,65 +104,80 @@ function RouletteForm() {
     }, [isResultVisible])
 
     return (
-        <>
-            <Wheel
-                mustStartSpinning={mustSpin}
-                prizeNumber={prizeNumber}
-                data={data}
-                onStopSpinning={() => {
-                    handleStop()
-                    setIsResultVisible(true)
-                    setMustSpin(false)
-                }}
-                spinDuration={0.2}
-            />
-            <input
-                type="number"
-                value={betAmount}
-                onChange={(event) =>
-                    setBetAmount(event.target.value.replace(/\D/g, ''))
-                }
-                placeholder="베팅할 코인 개수"
-                disabled={mustSpin}
-            />
-            <select
-                value={betColor}
-                onChange={(event) => setBetColor(event.target.value)}
-                placeholder="베팅할 색"
-                disabled={mustSpin}
-            >
-                <option value="">색 선택</option>
-                <option value="RED">RED</option>
-                <option value="BLUE">BLUE</option>
-            </select>
-            <button
-                onClick={handleSpinClick}
-                disabled={mustSpin || !betAmount || !betColor}
-            >
-                SPIN
-            </button>
-            {isResultVisible && (
-                <Modal
-                    show={isResultVisible}
-                    onHide={() => setIsResultVisible(false)}
+        <Container
+            fluid
+            className="vh-100 d-flex align-items-center justify-content-center"
+        >
+            <div className="d-flex flex-column align-items-center justify-content-center">
+                <Wheel
+                    mustStartSpinning={mustSpin}
+                    prizeNumber={prizeNumber}
+                    data={data}
+                    onStopSpinning={() => {
+                        handleStop()
+                        setIsResultVisible(true)
+                        setMustSpin(false)
+                    }}
+                    spinDuration={0.2}
+                    outerBorderColor={['#f2f2f2']}
+                    outerBorderWidth={[25]}
+                    innerBorderColor={['#f2f2f2']}
+                    radiusLineColor={['#dedede']}
+                    radiusLineWidth={[10]}
+                    backgroundColors={['#F22B35', '#46AEFF']}
+                />
+
+                <input
+                    type="number"
+                    value={betAmount}
+                    onChange={(event) =>
+                        setBetAmount(event.target.value.replace(/\D/g, ''))
+                    }
+                    placeholder="베팅할 코인 개수"
+                    disabled={mustSpin}
+                />
+
+                <select
+                    value={betColor}
+                    onChange={(event) => setBetColor(event.target.value)}
+                    placeholder="베팅할 색"
+                    disabled={mustSpin}
                 >
-                    <Modal.Header closeButton>
-                        <Modal.Title>결과</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <p>{resultMessage}</p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button
-                            variant="secondary"
-                            onClick={() => setIsResultVisible(false)}
-                        >
-                            닫기
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-            )}
-        </>
+                    <option value="">색 선택</option>
+                    <option value="RED">RED</option>
+                    <option value="BLUE">BLUE</option>
+                </select>
+
+                <button
+                    onClick={handleSpinClick}
+                    disabled={mustSpin || !betAmount || !betColor}
+                >
+                    SPIN
+                </button>
+
+                {isResultVisible && (
+                    <Modal
+                        show={isResultVisible}
+                        onHide={() => setIsResultVisible(false)}
+                    >
+                        <Modal.Header closeButton>
+                            <Modal.Title>결과</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>{resultMessage}</p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button
+                                variant="secondary"
+                                onClick={() => setIsResultVisible(false)}
+                            >
+                                닫기
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                )}
+            </div>
+        </Container>
     )
 }
 

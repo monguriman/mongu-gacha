@@ -50,7 +50,7 @@ function Header() {
                                 }}
                             >
                                 <p style={{ marginBottom: '5px' }}>
-                                    Lv.1 {portfolioOwner.name}
+                                    {portfolioOwner.name} 님
                                 </p>
                                 <p>코인 소지량 {coin}</p>
                             </div>

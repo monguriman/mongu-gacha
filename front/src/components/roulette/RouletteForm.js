@@ -108,7 +108,7 @@ function RouletteForm() {
             <input
                 type="number"
                 value={betAmount}
-                onChange={(event) => setBetAmount(event.target.value)}
+                onChange={(event) => setBetAmount(event.target.value.replace(/\D/g, ''))}
                 placeholder="베팅할 코인 개수"
                 disabled={mustSpin}
             />

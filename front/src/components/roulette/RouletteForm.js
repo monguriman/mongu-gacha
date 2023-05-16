@@ -3,7 +3,7 @@ import { Wheel } from 'react-custom-roulette'
 import { DispatchContext } from '../../App'
 import { Modal, Button, Container } from 'react-bootstrap'
 import * as Api from '../../api'
-
+import '../../styles/RouletteForm.css'
 const data = [{ option: 'RED' }, { option: 'BLUE' }]
 
 function RouletteForm() {
@@ -118,7 +118,7 @@ function RouletteForm() {
                         setIsResultVisible(true)
                         setMustSpin(false)
                     }}
-                    spinDuration={0.2}
+                    spinDuration={0.3}
                     outerBorderColor={['#f2f2f2']}
                     outerBorderWidth={[25]}
                     innerBorderColor={['#f2f2f2']}
@@ -126,8 +126,9 @@ function RouletteForm() {
                     radiusLineWidth={[10]}
                     backgroundColors={['#F22B35', '#46AEFF']}
                 />
-
+<br />
                 <input
+                    className='input'
                     type="number"
                     value={betAmount}
                     onChange={(event) =>
@@ -136,18 +137,18 @@ function RouletteForm() {
                     placeholder="베팅할 코인 개수"
                     disabled={mustSpin}
                 />
-
+                <br />
                 <select
                     value={betColor}
                     onChange={(event) => setBetColor(event.target.value)}
                     placeholder="베팅할 색"
                     disabled={mustSpin}
                 >
-                    <option value="">색 선택</option>
+                    <option value="">베팅할 색깔</option>
                     <option value="RED">RED</option>
                     <option value="BLUE">BLUE</option>
                 </select>
-
+                <br />
                 <button
                     onClick={handleSpinClick}
                     disabled={mustSpin || !betAmount || !betColor}

@@ -13,6 +13,7 @@ import Portfolio from "./components/Portfolio";
 import MiningForm from './components/mining/MiningForm';
 import SummonForm from './components/summon/SummonForm.js';
 import CollectionForm from "./components/collection/collectionForm";
+import RouletteForm from "./components/roulette/RouletteForm";
 
 export const UserStateContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -69,6 +70,7 @@ function App() {
             <Route path="/mining" element={<MiningForm />} />
             <Route path="/summon" element={<SummonForm />} />\
             <Route path="/collection" element={<CollectionForm />} />
+            <Route path="/roulette" element={<RouletteForm />} />
             <Route path="*" element={<Portfolio />} />
           </Routes>
         </Router>

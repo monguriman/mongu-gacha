@@ -17,7 +17,7 @@ function RouletteForm() {
     const [isResultVisible, setIsResultVisible] = useState(false)
     const [coin, setCoin] = useState(0) // 유저의 보유 코인 상태값 추가
 
-    const handleSpinClick = () => {
+    const handleSpinClick = async () => {
         if (!mustSpin && betAmount && betColor) {
             // 유저의 보유 코인과 베팅 금액을 비교하여 코인이 부족한 경우 에러 메시지 표시
             if (parseInt(betAmount) > coin) {
@@ -34,37 +34,48 @@ function RouletteForm() {
                 amount: parseInt(betAmount),
                 operation: 'deduct',
             }
-            Api.put('user/coin', requestBody)
-                .then((res) => {
-                    if (data[newPrizeNumber].option === betColor) {
-                        const addAmount = parseInt(betAmount) * 2
 
-                        const addRequestBody = {
-                            amount: addAmount,
-                            operation: 'add',
-                        }
-                        Api.put('user/coin', addRequestBody)
-                            .then((res) => {
-                                const user = res.data
-                                setResultMessage(
-                                    `축하합니다! 베팅한 코인의 2배를 얻었습니다. (+${addAmount} 코인)`
-                                )
-                                dispatch({
-                                    type: 'UPDATE_COIN',
-                                    payload: user,
-                                })
-                            })
-                            .catch((error) => console.log(error))
-                    } else {
-                        setResultMessage('코인을 잃었습니다.')
-                    }
-
-                        
-
+            try {
+                //먼저 베팅한 코인을 차감한다
+                const res = await Api.put('user/coin', requestBody)
+                //상단바에 즉각 반영되도록 전역 반영
+                dispatch({
+                    type: 'UPDATE_COIN',
+                    payload: res.data,
                 })
-                .catch((error) => console.log(error))
+
+                if (data[newPrizeNumber].option === betColor) {
+                    const addAmount = parseInt(betAmount) * 2
+
+                    const addRequestBody = {
+                        amount: addAmount,
+                        operation: 'add',
+                    }
+                    try {
+                        //게임에서 이겼다면 베팅한 코인 * 2 의 금액을 코인에 Add한다
+                        const res = await Api.put('user/coin', addRequestBody)
+                        const user = res.data
+                        setResultMessage(
+                            `축하합니다! 베팅한 코인의 2배를 얻었습니다. (+${addAmount} 코인)`
+                        )
+                        //상단바에 즉각 반영되도록 전역 반영
+                        dispatch({
+                            type: 'UPDATE_COIN',
+                            payload: user,
+                        })
+                    } catch (error) {
+                        console.log(error)
+                    }
+                } else {
+                    setResultMessage('코인을 잃었습니다.')
+                }
+            } catch (error) {
+                console.log(error)
+            }
         }
     }
+
+    const handleStop = () => {}
 
     useEffect(() => {
         setIsResultVisible(false)
@@ -103,7 +114,7 @@ function RouletteForm() {
                     setIsResultVisible(true)
                     setMustSpin(false)
                 }}
-                spinDuration={0.3}
+                spinDuration={0.2}
             />
             <input
                 type="number"

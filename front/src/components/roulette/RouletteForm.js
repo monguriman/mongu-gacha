@@ -20,7 +20,9 @@ function RouletteForm() {
     const handleSpinClick = async () => {
         if (!mustSpin && betAmount && betColor) {
             // 유저의 보유 코인과 베팅 금액을 비교하여 코인이 부족한 경우 에러 메시지 표시
-            if (parseInt(betAmount) > coin) {
+            console.log('스타트코인', coin)
+            console.log('벳어마운트', betAmount)
+            if (parseInt(betAmount) > coin || coin == 0) {
                 setResultMessage('코인이 부족합니다.')
                 setIsResultVisible(true)
                 return
@@ -93,7 +95,7 @@ function RouletteForm() {
                 setCoin(user.coin)
             })
             .catch((error) => console.log(error))
-    }, []) // 컴포넌트가 처음 렌더링될 때만 실행
+    }, [mustSpin])
 
     useEffect(() => {
         if (isResultVisible) {

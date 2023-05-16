@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Wheel } from 'react-custom-roulette'
-import { DispatchContext } from '../../App';
-
+import { DispatchContext } from '../../App'
+import { Modal, Button } from 'react-bootstrap'
 import * as Api from '../../api'
+
 const data = [{ option: 'RED' }, { option: 'BLUE' }]
 
 function RouletteForm() {
-    const dispatch = useContext(DispatchContext);
+    const dispatch = useContext(DispatchContext)
 
     const [mustSpin, setMustSpin] = useState(false)
     const [prizeNumber, setPrizeNumber] = useState(0)
@@ -38,7 +39,7 @@ function RouletteForm() {
                     const user = res.data
                     dispatch({
                         type: 'UPDATE_COIN',
-                        payload: user 
+                        payload: user,
                     })
                     if (data[newPrizeNumber].option === betColor) {
                         const addAmount = parseInt(betAmount) * 2
@@ -52,12 +53,10 @@ function RouletteForm() {
                                 const user = res.data
                                 dispatch({
                                     type: 'UPDATE_COIN',
-                                    payload: user 
+                                    payload: user,
                                 })
                             })
-                            .catch((error) =>
-                            console.log(error)
-                        )
+                            .catch((error) => console.log(error))
 
                         setResultMessage(
                             `축하합니다! 베팅한 코인의 2배를 얻었습니다. (+${addAmount} 코인)`
@@ -66,7 +65,6 @@ function RouletteForm() {
                         setResultMessage('코인을 잃었습니다.')
                     }
 
-                    setIsResultVisible(true)
                     setMustSpin(false)
                 })
                 .catch((error) => console.log(error))
@@ -87,6 +85,15 @@ function RouletteForm() {
             .catch((error) => console.log(error))
     }, []) // 컴포넌트가 처음 렌더링될 때만 실행
 
+    useEffect(() => {
+        if (isResultVisible) {
+            const timeout = setTimeout(() => {
+                setIsResultVisible(false)
+            }, 2000)
+            return () => clearTimeout(timeout)
+        }
+    }, [isResultVisible])
+
     return (
         <>
             <Wheel
@@ -96,18 +103,20 @@ function RouletteForm() {
                 onStopSpinning={() => {
                     setIsResultVisible(true)
                 }}
-                rotationTime={1000}
+                spinDuration={0.3}
             />
             <input
                 type="number"
                 value={betAmount}
                 onChange={(event) => setBetAmount(event.target.value)}
                 placeholder="베팅할 코인 개수"
+                disabled={mustSpin}
             />
             <select
                 value={betColor}
                 onChange={(event) => setBetColor(event.target.value)}
                 placeholder="베팅할 색"
+                disabled={mustSpin}
             >
                 <option value="">색 선택</option>
                 <option value="RED">RED</option>
@@ -119,7 +128,27 @@ function RouletteForm() {
             >
                 SPIN
             </button>
-            {isResultVisible && <p>{resultMessage}</p>}
+            {isResultVisible && (
+                <Modal
+                    show={isResultVisible}
+                    onHide={() => setIsResultVisible(false)}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>결과</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>{resultMessage}</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button
+                            variant="secondary"
+                            onClick={() => setIsResultVisible(false)}
+                        >
+                            닫기
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            )}
         </>
     )
 }

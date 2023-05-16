@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import * as Api from '../../api'
 import { Container, Button, Modal } from 'react-bootstrap'
 import { UserStateContext, DispatchContext } from '../../App'
@@ -11,6 +11,7 @@ function SummonForm() {
     const userState = useContext(UserStateContext)
     const [modalShow, setModalShow] = useState(false)
     const [drewCard, setDrewCard] = useState(null)
+    const [userCards, setUserCards] = useState([]) // 기존 카드 정보를 담을 상태 추가
 
     const {
         card_1,
@@ -45,6 +46,20 @@ function SummonForm() {
         card_30,
     } = images
 
+    useEffect(() => {
+        fetchUserCards() // 컴포넌트가 마운트될 때 기존 카드 정보 가져오기
+    }, [])
+
+    // 유저의 기존 카드 정보를 가져오는 비동기 함수
+    const fetchUserCards = async () => {
+        try {
+            const response = await Api.get('collection')
+            setUserCards(response.data.card)
+        } catch (error) {
+            console.error('Error fetching userCards:', error)
+        }
+    }
+
     const handleSummon = async () => {
         try {
             const response = await Api.put(`user/summon`)
@@ -72,6 +87,43 @@ function SummonForm() {
         return images[`card_${cardNumber}`]
     }
 
+    const renderModalContent = () => {
+        if (drewCard) {
+            // 새로 뽑은 카드의 카드 번호
+            const newCardNumber = drewCard.cardNumber
+
+            // 기존 카드 목록에 새로 뽑은 카드 번호가 포함되어 있는지 확인
+            const isExistingCard = userCards.some(
+                (card) => card.cardNumber === newCardNumber
+            )
+
+            // 모달 내용 렌더링
+            return (
+                <div className="modal-card-reveal-animation">
+                    <p>카드번호: {drewCard.cardNumber}</p>
+                    <p>희귀도: {drewCard.cardRarity}</p>
+                    <img
+                        src={getCardImage(drewCard.cardNumber)}
+                        alt={`Card ${drewCard.cardNumber}`}
+                        style={{
+                            scale: '0.7',
+                            borderRadius: '15px',
+                            maxWidth: '100%',
+                            maxHeight: '100%',
+                        }}
+                    />
+                    {isExistingCard ? (
+                        <p>이미 가지고 있는 카드입니다.</p>
+                    ) : (
+                        <p>새로운 카드입니다!!!</p>
+                    )}
+                </div>
+            )
+        }
+
+        return null
+    }
+
     return (
         <Container>
             <Button className="summon-button" onClick={handleSummon}>
@@ -83,22 +135,7 @@ function SummonForm() {
                     <Modal.Title>다음 카드를 획득했습니다!</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {drewCard && (
-                        <div className="modal-card-reveal-animation">
-                            <p>카드번호: {drewCard.cardNumber}</p>
-                            <p>희귀도: {drewCard.cardRarity}</p>
-                            <img
-                                src={getCardImage(drewCard.cardNumber)}
-                                alt={`Card ${drewCard.cardNumber}`}
-                                style={{
-                                    scale: '0.7',
-                                    borderRadius: '15px',
-                                    maxWidth: '100%',
-                                    maxHeight: '100%',
-                                }}
-                            />
-                        </div>
-                    )}
+                {renderModalContent()}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button

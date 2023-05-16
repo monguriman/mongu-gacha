@@ -136,7 +136,7 @@ function Portfolio() {
             </div>
             <br />
             <div className="wrapper">
-                <a className="cta" href="#">
+                <a className="cta" href="/collection">
                     <span>도감</span>
                     <span>
                         <svg

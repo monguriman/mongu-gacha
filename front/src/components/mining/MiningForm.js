@@ -18,7 +18,7 @@ function MiningForm() {
 
     const handleAddCoin = async () => {
         try {
-            const isCritical = Math.random() < 0.30 // 5% 확률로 true
+            const isCritical = Math.random() < 0.20 // 20% 확률로 true
             const amount = isCritical ? 10 : 1;
             const response = await Api.put('user/coin', {
                 amount,
@@ -115,7 +115,7 @@ function MiningForm() {
                         <Image src={mining_2} alt="Image 2" width="50%" fluid />
                     )} 
                     <div style={{ fontSize:'11px'}}>
-                        * 채굴 버튼 1회당 1개의 코인을 얻을 수 있습니다. <br />* 5%의 확률로 10개의 코인을 얻을 수 있는 크리티컬이 발생합니다.
+                        * 채굴 버튼 1회당 1개의 코인을 얻을 수 있습니다. <br />* 20%의 확률로 10개의 코인을 얻을 수 있는 크리티컬이 발생합니다.
                     </div>
                 </Card.Body>
             </Card>

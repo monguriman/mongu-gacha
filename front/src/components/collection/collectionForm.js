@@ -90,10 +90,14 @@ function CollectionForm() {
 
             return (
                 <Card
-                    className={`mb-5 ms-5 mr-5 ${isCardOwned(card.totalCardNumber) ? 'owned' : 'not-owned'}`}
+                    className={`mb-5 ms-5 mr-5 ${
+                        isCardOwned(card.totalCardNumber)
+                            ? 'owned'
+                            : 'not-owned'
+                    }`}
                     style={{
                         width: '18rem',
-                        height: '36rem',
+                        height: '28rem',
                         borderRadius: '18px',
                     }}
                     key={card.totalCardNumber}
@@ -103,32 +107,44 @@ function CollectionForm() {
                             <div className="card-info">
                                 <p>카드 번호: {card.totalCardNumber}</p>
                                 <p>등급: {card.rarity}</p>
-                                {isCardOwned(card.totalCardNumber) && (
-                                    <p>
-                                        {getCardCount(card.totalCardNumber)}장
-                                        보유중
-                                    </p>
-                                )}
+                                <p style={{marginBottom:'10px'}}>
+                                    {isCardOwned(card.totalCardNumber) && (
+                                        <a>
+                                            {getCardCount(card.totalCardNumber)}
+                                            장 보유중
+                                        </a>
+                                    )}<a>　</a>
+                                </p>
                             </div>
-                            <div className={`card-image ${isCardOwned(card.totalCardNumber) ? '' : 'not-owned'}`}>
+                            <div
+                                className={`card-image ${
+                                    isCardOwned(card.totalCardNumber)
+                                        ? ''
+                                        : 'not-owned'
+                                }`}
+                            >
                                 <Image
                                     src={cardImage}
                                     alt={`Image ${card.totalCardNumber}`}
                                     fluid
-                                    className={`${isCardOwned(card.totalCardNumber) ? '' : 'not-owned'}`}
+                                    className={`${
+                                        isCardOwned(card.totalCardNumber)
+                                            ? ''
+                                            : 'not-owned'
+                                    }`}
+                                    style={{ borderRadius: '15px' }}
                                 />
                             </div>
                         </Row>
                     </Card.Body>
                 </Card>
-            );
-            
+            )
         })
     }
 
     return (
         <>
-            <h2>Total Cards</h2>
+            <h2 className="text-center mt-5 mb-4">나의 도감</h2>
             <Container fluid className="pt-4">
                 <Row xs="auto" className="justify-content-center">
                     {renderSortedCards()}

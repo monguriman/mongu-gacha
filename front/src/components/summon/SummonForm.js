@@ -48,7 +48,7 @@ function SummonForm() {
 
     useEffect(() => {
         fetchUserCards() // 컴포넌트가 마운트될 때 기존 카드 정보 가져오기
-    }, [])
+    }, [drewCard])
 
     // 유저의 기존 카드 정보를 가져오는 비동기 함수
     const fetchUserCards = async () => {

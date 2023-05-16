@@ -36,11 +36,6 @@ function RouletteForm() {
             }
             Api.put('user/coin', requestBody)
                 .then((res) => {
-                    const user = res.data
-                    dispatch({
-                        type: 'UPDATE_COIN',
-                        payload: user,
-                    })
                     if (data[newPrizeNumber].option === betColor) {
                         const addAmount = parseInt(betAmount) * 2
 
@@ -51,21 +46,21 @@ function RouletteForm() {
                         Api.put('user/coin', addRequestBody)
                             .then((res) => {
                                 const user = res.data
+                                setResultMessage(
+                                    `축하합니다! 베팅한 코인의 2배를 얻었습니다. (+${addAmount} 코인)`
+                                )
                                 dispatch({
                                     type: 'UPDATE_COIN',
                                     payload: user,
                                 })
                             })
                             .catch((error) => console.log(error))
-
-                        setResultMessage(
-                            `축하합니다! 베팅한 코인의 2배를 얻었습니다. (+${addAmount} 코인)`
-                        )
                     } else {
                         setResultMessage('코인을 잃었습니다.')
                     }
 
-                    setMustSpin(false)
+                        
+
                 })
                 .catch((error) => console.log(error))
         }
@@ -74,6 +69,10 @@ function RouletteForm() {
     useEffect(() => {
         setIsResultVisible(false)
     }, [betAmount, betColor])
+
+    useEffect(() => {
+        console.log(mustSpin)
+    }, [mustSpin])
 
     useEffect(() => {
         // 유저의 보유 코인 가져오기
@@ -102,13 +101,16 @@ function RouletteForm() {
                 data={data}
                 onStopSpinning={() => {
                     setIsResultVisible(true)
+                    setMustSpin(false)
                 }}
                 spinDuration={0.3}
             />
             <input
                 type="number"
                 value={betAmount}
-                onChange={(event) => setBetAmount(event.target.value.replace(/\D/g, ''))}
+                onChange={(event) =>
+                    setBetAmount(event.target.value.replace(/\D/g, ''))
+                }
                 placeholder="베팅할 코인 개수"
                 disabled={mustSpin}
             />

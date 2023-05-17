@@ -47,7 +47,7 @@ function SummonForm() {
     } = images
 
     useEffect(() => {
-        fetchUserCards() // 컴포넌트가 마운트될 때 기존 카드 정보 가져오기
+        fetchUserCards()
     }, [drewCard])
 
     // 유저의 기존 카드 정보를 가져오는 비동기 함수
@@ -82,6 +82,27 @@ function SummonForm() {
         }
     }
 
+    const handleSummonEleven = async () => {
+        try {
+            const response = await Api.put('user/summonEleven')
+            const cards = response.data
+            setDrewCard(cards[cards.length - 1])
+            setModalShow(true)
+
+            const userData = await Api.get('user/current')
+            const user = userData.data
+            dispatch({
+                type: 'UPDATE_COIN',
+                payload: user,
+            })
+        } catch (err) {
+            if (err.response.status === 400) {
+                alert(err.response.data.error)
+            }
+            console.log('코인이 부족합니다.', err)
+        }
+    }
+
     const getCardImage = (cardNumber) => {
         // 카드 번호에 해당하는 이미지 경로를 가져옴
         return images[`card_${cardNumber}`]
@@ -89,15 +110,11 @@ function SummonForm() {
 
     const renderModalContent = () => {
         if (drewCard) {
-            // 새로 뽑은 카드의 카드 번호
             const newCardNumber = drewCard.cardNumber
-
-            // 기존 카드 목록에 새로 뽑은 카드 번호가 포함되어 있는지 확인
             const isExistingCard = userCards.some(
                 (card) => card.cardNumber === newCardNumber
             )
 
-            // 모달 내용 렌더링
             return (
                 <div className="modal-card-reveal-animation">
                     <p>카드번호: {drewCard.cardNumber}</p>
@@ -120,7 +137,6 @@ function SummonForm() {
                 </div>
             )
         }
-
         return null
     }
 
@@ -129,14 +145,15 @@ function SummonForm() {
             <Button className="summon-button" onClick={handleSummon}>
                 소환
             </Button>
+            <Button className="summon-button" onClick={handleSummonEleven}>
+                11연속 소환
+            </Button>
 
             <Modal show={modalShow} onHide={() => setModalShow(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>다음 카드를 획득했습니다!</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                {renderModalContent()}
-                </Modal.Body>
+                <Modal.Body>{renderModalContent()}</Modal.Body>
                 <Modal.Footer>
                     <Button
                         variant="secondary"

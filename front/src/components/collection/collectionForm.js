@@ -133,12 +133,13 @@ function CollectionForm() {
                                     style={{
                                         position: 'absolute', // Add position absolute to overlay the text
                                         top: '5%', // Position the text in the middle vertically
-                                        left: '5%', // Position the text in the middle horizontally
+                                        left: '5.5%', // Position the text in the middle horizontally
                                         transform: 'translate(-50%, -50%)', // Center the text
                                         color: 'white', // Set the text color to white
                                         textAlign: 'left', // Center align the text
                                         fontStyle: 'italic',
                                         fontWeight: '900',
+                                        fontSize: '1.4rem'
                                     }}
                                 >
                                     <p>{card.totalCardNumber}</p>

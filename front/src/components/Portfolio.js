@@ -54,7 +54,7 @@ function Portfolio() {
     return (
         <>
 <Container>
-  <Row className="justify-content-center">
+<Row className="justify-content-center pt-5 flex-column align-items-center">
     <Col xs={6} md={3} className="mb-3">
       <img
         src={menuButtons['miningButton']}
@@ -69,8 +69,6 @@ function Portfolio() {
         style={{ cursor: 'pointer', width: '100%', height: '100%' }}
       />
     </Col>
-  </Row>
-  <Row className="justify-content-center">
     <Col xs={6} md={3} className="mb-3">
       <img
         src={menuButtons['rouletteButton']}

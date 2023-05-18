@@ -7,6 +7,22 @@
     outline: none;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+
+    &.summoning {
+        animation: pulsate 3s infinite;
+    }
+
+    @keyframes pulsate {
+        0% {
+            box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+        }
+        50% {
+            box-shadow: 0 0 0 20px rgba(0, 123, 255, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+        }
+    }
 }
 
 .summon-button:hover {

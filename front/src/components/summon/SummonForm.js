@@ -3,15 +3,15 @@ import * as Api from '../../api'
 import { Container, Button, Modal } from 'react-bootstrap'
 import { UserStateContext, DispatchContext } from '../../App'
 import '../../styles/SummonForm.css'
-
 import images from '../../images/imageIndex'
+import { ReactComponent as TrashCan } from '../../images/uiImages/trashcan.svg'
 
 function SummonForm() {
     const dispatch = useContext(DispatchContext)
     const userState = useContext(UserStateContext)
     const [modalShow, setModalShow] = useState(false)
     const [drewCard, setDrewCard] = useState(null)
-    const [userCards, setUserCards] = useState([]) // 기존 카드 정보를 담을 상태 추가
+    const [userCards, setUserCards] = useState([])
 
     const {
         card_1,
@@ -50,7 +50,6 @@ function SummonForm() {
         fetchUserCards()
     }, [drewCard])
 
-    // 유저의 기존 카드 정보를 가져오는 비동기 함수
     const fetchUserCards = async () => {
         try {
             const response = await Api.get('collection')
@@ -76,9 +75,9 @@ function SummonForm() {
         } catch (err) {
             if (err.response.status === 400) {
                 alert(err.response.data.error)
+            } else {
+                console.log('코인이 부족합니다.', err)
             }
-            console.log(err.response)
-            console.log('코인이 부족합니다.', err)
         }
     }
 
@@ -98,13 +97,13 @@ function SummonForm() {
         } catch (err) {
             if (err.response.status === 400) {
                 alert(err.response.data.error)
+            } else {
+                console.log('코인이 부족합니다.', err)
             }
-            console.log('코인이 부족합니다.', err)
         }
     }
 
     const getCardImage = (cardNumber) => {
-        // 카드 번호에 해당하는 이미지 경로를 가져옴
         return images[`card_${cardNumber}`]
     }
 
@@ -142,10 +141,20 @@ function SummonForm() {
 
     return (
         <Container>
-            <Button className="summon-button" onClick={handleSummon}>
+            {/* <TrashCan /> */}
+            <Button
+                className="summon-button"
+                onClick={handleSummon}
+                disabled={userState.coin < 30}
+            >
                 소환
             </Button>
-            <Button className="summon-button" onClick={handleSummonEleven}>
+            <div>　</div>
+            <Button
+                className="summon-button"
+                onClick={handleSummonEleven}
+                disabled={userState.coin < 300}
+            >
                 11연속 소환
             </Button>
 

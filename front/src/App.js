@@ -6,13 +6,12 @@ import { loginReducer } from "./reducer";
 
 import Header from "./components/Header";
 import LoginForm from "./components/user/LoginForm";
-import Network from "./components/user/Network";
 import RegisterForm from "./components/user/RegisterForm";
 import Portfolio from "./components/Portfolio";
 
 import MiningForm from './components/mining/MiningForm';
 import SummonForm from './components/summon/SummonForm.js';
-import CollectionForm from "./components/collection/collectionForm";
+import CollectionForm from "./components/collection/CollectionForm";
 import RouletteForm from "./components/roulette/RouletteForm";
 
 export const UserStateContext = createContext(null);

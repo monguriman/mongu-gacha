@@ -172,12 +172,10 @@ p:last-child {
    */
 ::-moz-selection {
   background-color: #fa6862;
-  color: #fff;
 }
 
 ::selection {
   background-color: #fa6862;
-  color: #fff;
 }
 
 /*

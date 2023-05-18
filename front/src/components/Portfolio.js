@@ -6,6 +6,7 @@ import { UserStateContext } from '../App'
 import * as Api from '../api'
 import '../styles/Home.css'
 import menuButtons from '../images/menuButtons'
+import Logo from '../images/logo.png'
 
 function Portfolio() {
     const navigate = useNavigate()
@@ -54,6 +55,7 @@ function Portfolio() {
     return (
         <>
 <Container>
+  <img src={Logo} />
 <Row className="justify-content-center pt-5 flex-column align-items-center">
     <Col xs={6} md={5} xl={4} className="mb-5">
       <img className='homeButton'

@@ -101,6 +101,7 @@ function CollectionForm() {
                 <Card
                     className={`mb-5 mt-3 ms-5 mr-5`}
                     style={{
+                        position: 'relative', // Add position relative to the card
                         width: '18rem',
                         height: '21.46rem',
                         borderRadius: '4px',
@@ -127,19 +128,41 @@ function CollectionForm() {
                                         marginTop: '18px',
                                     }}
                                 />
-                                <div className="card-info">
-                                    <p>카드 번호: {card.totalCardNumber}</p>
-                                    <p>등급: {card.rarity}</p>
+                                <div
+                                    className="card-info"
+                                    style={{
+                                        position: 'absolute', // Add position absolute to overlay the text
+                                        top: '5%', // Position the text in the middle vertically
+                                        left: '5%', // Position the text in the middle horizontally
+                                        transform: 'translate(-50%, -50%)', // Center the text
+                                        color: 'white', // Set the text color to white
+                                        textAlign: 'left', // Center align the text
+                                        fontStyle: 'italic',
+                                        fontWeight: '900',
+                                    }}
+                                >
+                                    <p>{card.totalCardNumber}</p>
+                                </div>
+                                <div
+                                    className="card-info"
+                                    style={{
+                                        position: 'absolute', // Add position absolute to overlay the text
+                                        top: '85%', // Position the text in the middle vertically
+                                        right: '8%', // Position the text in the middle horizontally
+                                        color: 'white', // Set the text color to white
+                                        textAlign: 'left', // Center align the text
+                                        fontWeight: '300',
+                                    }}
+                                >
                                     <p>
                                         {isCardOwned(card.totalCardNumber) && (
                                             <a>
-                                                {getCardCount(
+                                                × {getCardCount(
                                                     card.totalCardNumber
                                                 )}
-                                                장 보유중
+                                                
                                             </a>
                                         )}
-                                        <a>　</a>
                                     </p>
                                 </div>
                             </div>

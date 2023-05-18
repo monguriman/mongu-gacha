@@ -310,7 +310,7 @@ label {
   margin-top: 20px;
 }
 .site-wrapper {
-  border-top: 4px solid #ff0037;
+  border-top: 4px solid black;
 }
 
 .page-close {
@@ -709,4 +709,13 @@ label {
     -o-transform: rotate(30deg) translate(0px, 0px);
     transform: rotate(30deg) translate(0px, 0px);
   }
+}
+
+.homeButton {
+  transition: box-shadow 0.3s, filter 0.3s;
+}
+
+.homeButton:hover {
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.45);
 }

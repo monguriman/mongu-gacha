@@ -56,28 +56,28 @@ function Portfolio() {
 <Container>
 <Row className="justify-content-center pt-5 flex-column align-items-center">
     <Col xs={6} md={5} xl={4} className="mb-5">
-      <img
+      <img className='homeButton'
         src={menuButtons['miningButton']}
         onClick={() => navigate('/mining')}
         style={{ cursor: 'pointer', width: '100%', height: '100%' }}
       />
     </Col>
     <Col xs={6} md={5} xl={4} className="mb-5">
-      <img
+      <img className='homeButton'
         src={menuButtons['summonButton']}
         onClick={() => navigate('/summon')}
         style={{ cursor: 'pointer', width: '100%', height: '100%' }}
       />
     </Col>
     <Col xs={6} md={5} xl={4} className="mb-5">
-      <img
+      <img className='homeButton'
         src={menuButtons['rouletteButton']}
         onClick={() => navigate('/roulette')}
         style={{ cursor: 'pointer', width: '100%', height: '100%' }}
       />
     </Col>
     <Col xs={6} md={5} xl={4} className="mb-5">
-      <img
+      <img className='homeButton'
         src={menuButtons['collectionButton']}
         onClick={() => navigate('/collection')}
         style={{ cursor: 'pointer', width: '100%', height: '100%' }}

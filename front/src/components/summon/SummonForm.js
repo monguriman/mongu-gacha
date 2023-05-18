@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react'
 import * as Api from '../../api'
-import { Container, Button, Modal } from 'react-bootstrap'
+import { Container, Button, Modal, Card, Row, Image } from 'react-bootstrap'
 import { UserStateContext, DispatchContext } from '../../App'
 import '../../styles/SummonForm.css'
 import images from '../../images/imageIndex'
+import cardFrames from '../../images/cardFrames'
 
 function SummonForm() {
     const dispatch = useContext(DispatchContext)
@@ -114,25 +115,75 @@ function SummonForm() {
             )
 
             return (
-                <div className="modal-card-reveal-animation">
-                    <p>카드번호: {drewCard.cardNumber}</p>
-                    <p>희귀도: {drewCard.cardRarity}</p>
-                    <img
-                        src={getCardImage(drewCard.cardNumber)}
-                        alt={`Card ${drewCard.cardNumber}`}
+                <>
+                    <Card
                         style={{
-                            scale: '0.7',
-                            borderRadius: '15px',
-                            maxWidth: '100%',
-                            maxHeight: '100%',
+                            backgroundImage: `url(${getCardImage(
+                                drewCard.cardNumber
+                            )})`,
+                            width: '18rem',
+                            height: '21.46rem',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
                         }}
-                    />
-                    {isExistingCard ? (
-                        <p>이미 가지고 있는 카드입니다.</p>
-                    ) : (
-                        <p>새로운 카드입니다!!!</p>
-                    )}
-                </div>
+                    >
+                        <Card.Body>
+                            <Row className="justify-content-md-center">
+                                <div className={`card-image`}>
+                                    <Image
+                                        src={
+                                            cardFrames[
+                                                `cardFrame${drewCard.cardRarity}`
+                                            ]
+                                        }
+                                        alt={`Card Image`}
+                                        fluid
+                                        className={``}
+                                        style={{
+                                            scale: '1.26',
+                                            borderRadius: '0px',
+                                            marginTop: '17.5px',
+                                        }}
+                                    />
+                                    <div
+                                        className="card-info"
+                                        style={{
+                                            position: 'absolute', // Add position absolute to overlay the text
+                                            top: '5%', // Position the text in the middle vertically
+                                            left: '5.5%', // Position the text in the middle horizontally
+                                            transform: 'translate(-50%, -50%)', // Center the text
+                                            color: 'white', // Set the text color to white
+                                            textAlign: 'left', // Center align the text
+                                            fontStyle: 'italic',
+                                            fontWeight: '900',
+                                            fontSize: '1.4rem',
+                                        }}
+                                    >
+                                        <p>{drewCard.cardNumber}</p>
+                                    </div>
+                                    <div
+                                        className="card-info"
+                                        style={{
+                                            position: 'absolute', // Add position absolute to overlay the text
+                                            top: '85%', // Position the text in the middle vertically
+                                            right: '8%', // Position the text in the middle horizontally
+                                            color: 'white', // Set the text color to white
+                                            textAlign: 'left', // Center align the text
+                                            fontWeight: '300',
+                                        }}
+                                    ></div>
+                                </div>
+                            </Row>
+                        </Card.Body>
+                    </Card>
+                    <div className="modal-card-reveal-animation mt-5">
+                        {isExistingCard ? (
+                            <p>이미 가지고 있는 카드입니다.</p>
+                        ) : (
+                            <p>새로운 카드입니다!!!</p>
+                        )}
+                    </div>
+                </>
             )
         }
         return null
@@ -156,11 +207,19 @@ function SummonForm() {
                 11연속 소환
             </Button>
 
-            <Modal show={modalShow} onHide={() => setModalShow(false)}>
+            <Modal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                className="text-center"
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>다음 카드를 획득했습니다!</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{renderModalContent()}</Modal.Body>
+                <Modal.Body>
+                    <Row className="justify-content-center">
+                        {renderModalContent()}
+                    </Row>
+                </Modal.Body>
                 <Modal.Footer>
                     <Button
                         variant="secondary"

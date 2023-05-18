@@ -4,7 +4,6 @@ import { Container, Button, Modal } from 'react-bootstrap'
 import { UserStateContext, DispatchContext } from '../../App'
 import '../../styles/SummonForm.css'
 import images from '../../images/imageIndex'
-import { ReactComponent as TrashCan } from '../../images/uiImages/trashcan.svg'
 
 function SummonForm() {
     const dispatch = useContext(DispatchContext)
@@ -141,7 +140,6 @@ function SummonForm() {
 
     return (
         <Container>
-            {/* <TrashCan /> */}
             <Button
                 className="summon-button"
                 onClick={handleSummon}

@@ -4,7 +4,7 @@ import * as Api from '../../api'
 import { Container, Card, Row, Image, Modal, Button } from 'react-bootstrap'
 import '../../styles/CollectionForm.css'
 import images from '../../images/imageIndex'
-import cardFrame from '../../images/uiImages/cardFrame.png'
+import cardFrames from '../../images/cardFrames'
 
 function CollectionForm() {
     const {
@@ -95,56 +95,53 @@ function CollectionForm() {
         const sortedCards = sortByTotalCardNumber(totalCards)
         return sortedCards.map((card) => {
             const cardImage = images[`card_${card.totalCardNumber}`]
-        
+            const cardFrame = cardFrames[`cardFrame${card.rarity}`] // Get the appropriate card frame based on card rarity
+
             return (
                 <Card
-                    className={`mb-5 mt-3 ms-5 mr-5 ${
-                        isCardOwned(card.totalCardNumber) ? 'owned' : 'not-owned'
-                    }`}
+                    className={`mb-5 mt-3 ms-5 mr-5`}
                     style={{
                         width: '18rem',
-                        height: '22rem',
-                        borderRadius: '10px',
+                        height: '21.46rem',
+                        borderRadius: '4px',
                         backgroundImage: `url(${cardImage})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
+                        filter: isCardOwned(card.totalCardNumber)
+                            ? ''
+                            : 'grayscale(100%) blur(10px)',
                     }}
                     key={card.totalCardNumber}
                 >
                     <Card.Body>
                         <Row className="justify-content-md-center">
-
-                            <div
-                                className={`card-image ${
-                                    isCardOwned(card.totalCardNumber)
-                                        ? ''
-                                        : 'not-owned'
-                                }`}
-                            >
+                            <div className={`card-image`}>
                                 <Image
                                     src={cardFrame}
                                     alt={`Image ${card.totalCardNumber}`}
                                     fluid
-                                    className={`${
-                                        isCardOwned(card.totalCardNumber)
-                                            ? ''
-                                            : 'not-owned'
-                                    } mb-3`}
-                                    style={{ scale: '1.28', borderRadius: '15px' }}
+                                    className={``}
+                                    style={{
+                                        scale: '1.255',
+                                        borderRadius: '0px',
+                                        marginTop: '18px',
+                                    }}
                                 />
-                                                            <div className="card-info">
-                                <p>카드 번호: {card.totalCardNumber}</p>
-                                <p>등급: {card.rarity}</p>
-                                <p style={{ marginBottom: '10px' }}>
-                                    {isCardOwned(card.totalCardNumber) && (
-                                        <a>
-                                            {getCardCount(card.totalCardNumber)}
-                                            장 보유중
-                                        </a>
-                                    )}
-                                    <a>　</a>
-                                </p>
-                            </div>
+                                <div className="card-info">
+                                    <p>카드 번호: {card.totalCardNumber}</p>
+                                    <p>등급: {card.rarity}</p>
+                                    <p style={{ marginBottom: '10px' }}>
+                                        {isCardOwned(card.totalCardNumber) && (
+                                            <a>
+                                                {getCardCount(
+                                                    card.totalCardNumber
+                                                )}
+                                                장 보유중
+                                            </a>
+                                        )}
+                                        <a>　</a>
+                                    </p>
+                                </div>
                             </div>
                         </Row>
                     </Card.Body>

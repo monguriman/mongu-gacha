@@ -130,7 +130,7 @@ function CollectionForm() {
                                 <div className="card-info">
                                     <p>카드 번호: {card.totalCardNumber}</p>
                                     <p>등급: {card.rarity}</p>
-                                    <p style={{ marginBottom: '10px' }}>
+                                    <p>
                                         {isCardOwned(card.totalCardNumber) && (
                                             <a>
                                                 {getCardCount(

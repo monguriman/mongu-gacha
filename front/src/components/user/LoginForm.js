@@ -75,7 +75,7 @@ function LoginForm() {
 
 
   return (
-    <Container>
+    <Container className='loginContainer'>
       <form class="form_main" onSubmit={handleSubmit}>
         <p class="heading">Login</p>
         <div class="inputContainer">

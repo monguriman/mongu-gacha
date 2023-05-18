@@ -78,7 +78,7 @@ function Header() {
                         onClick={() => navigate('/roulette')}
                         style={{ color: '#FFFFFF', fontWeight: '500' }}
                     >
-                        도박
+                        룰렛
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>

@@ -82,15 +82,15 @@ function RouletteForm() {
             payload: user,
         })
     }
-    
-    useEffect(() => { 
-        console.log(userState.user)
-          // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
-          if (!userState.user) {
-              navigate('/login', { replace: true })
-              return
-          }
-      }, [userState])
+
+    useEffect(() => {
+        alert('로그인 후 사용가능한 메뉴입니다.')
+        // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
+        if (!userState.user) {
+            navigate('/login', { replace: true })
+            return
+        }
+    }, [userState])
 
     useEffect(() => {
         setIsResultVisible(false)
@@ -138,9 +138,9 @@ function RouletteForm() {
                     radiusLineWidth={[10]}
                     backgroundColors={['#F22B35', '#46AEFF']}
                 />
-<br />
+                <br />
                 <input
-                    className='input'
+                    className="input"
                     type="number"
                     value={betAmount}
                     onChange={(event) =>

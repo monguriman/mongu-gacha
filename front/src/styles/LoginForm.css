@@ -5,11 +5,18 @@ body {
   background-attachment: fixed;
 }
 
+.logoContainer {
+    margin-top: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 .loginContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 63vh;
   }
 
 .form_main {
@@ -25,7 +32,7 @@ body {
 }
 
 .heading {
-  font-size: 2.5em;
+  font-size: 1.9em;
   color: #2e2e2e;
   font-weight: 700;
   margin: 15px 0 30px 0;

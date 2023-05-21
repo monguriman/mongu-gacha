@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Container, Col, Row, Form, Button } from 'react-bootstrap'
+import { Container, Form } from 'react-bootstrap'
+import { DispatchContext, UserStateContext } from '../../App'
 
 import * as Api from '../../api'
 
 function RegisterForm() {
   const navigate = useNavigate()
+  const dispatch = useContext(DispatchContext)
+  const userState = useContext(UserStateContext)
 
   //useState로 email 상태를 생성함.
   const [email, setEmail] = useState('abc@example.com')
@@ -14,7 +17,7 @@ function RegisterForm() {
   //useState로 confirmPassword 상태를 생성함.
   const [confirmPassword, setConfirmPassword] = useState('1111')
   //useState로 name 상태를 생성함.
-  const [name, setName] = useState('이름')
+  const [name, setName] = useState('')
 
   //이메일이 abc@example.com 형태인지 regex를 이용해 확인함.
   const validateEmail = (email) => {
@@ -49,9 +52,28 @@ function RegisterForm() {
         name,
       })
 
-      // 로그인 페이지로 이동함.
-      navigate('/login')
+            const res = await Api.post('user/login', {
+                email,
+                password,
+            })
+            // 유저 정보는 response의 data임.
+            const user = res.data
+            console.log(user)
+            // JWT 토큰은 유저 정보의 token임.
+            const jwtToken = user.token
+            // sessionStorage에 "userToken"이라는 키로 JWT 토큰을 저장함.
+            sessionStorage.setItem('userToken', jwtToken)
+            // dispatch 함수를 이용해 로그인 성공 상태로 만듦.
+            dispatch({
+                type: 'LOGIN_SUCCESS',
+                payload: user,
+            })
+
+            // 기본 페이지로 이동함.
+            navigate('/', { replace: true })
+
     } catch (err) {
+      alert(err.response.data.error)
       console.log('회원가입에 실패하였습니다.', err)
     }
   }
@@ -74,7 +96,7 @@ function RegisterForm() {
           </svg>
           <input
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
+            placeholder="이메일"
             id="registerEmail"
             class="inputField"
             type="text"
@@ -102,7 +124,7 @@ function RegisterForm() {
           </svg>
           <input
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            placeholder="패스워드"
             id="registerPassword"
             class="inputField"
             type="password"
@@ -130,7 +152,7 @@ function RegisterForm() {
           </svg>
           <input
             onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Password Confirm"
+            placeholder="패스워드 확인"
             id="registerConfirmPassword"
             class="inputField"
             type="password"
@@ -163,7 +185,7 @@ function RegisterForm() {
           </svg>
           <input
             onChange={(e) => setName(e.target.value)}
-            placeholder="Name"
+            placeholder="이름"
             id="registerName"
             class="inputField"
             type="text"

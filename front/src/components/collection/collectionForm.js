@@ -52,14 +52,14 @@ function CollectionForm() {
     const [userCards, setUserCards] = useState([])
     const [showCongratsModal, setShowCongratsModal] = useState(false)
 
-    useEffect(() => { 
-        console.log(userState.user)
-          // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
-          if (!userState.user) {
-              navigate('/login', { replace: true })
-              return
-          }
-      }, [userState])
+    useEffect(() => {
+        alert('로그인 후 사용가능한 메뉴입니다.')
+        // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
+        if (!userState.user) {
+            navigate('/login', { replace: true })
+            return
+        }
+    }, [userState])
 
     useEffect(() => {
         // totalCard 정보를 가져오는 비동기 함수
@@ -152,7 +152,7 @@ function CollectionForm() {
                                         textAlign: 'left', // Center align the text
                                         fontStyle: 'italic',
                                         fontWeight: '900',
-                                        fontSize: '1.4rem'
+                                        fontSize: '1.4rem',
                                     }}
                                 >
                                     <p>{card.totalCardNumber}</p>
@@ -171,10 +171,10 @@ function CollectionForm() {
                                     <p>
                                         {isCardOwned(card.totalCardNumber) && (
                                             <a>
-                                                × {getCardCount(
+                                                ×{' '}
+                                                {getCardCount(
                                                     card.totalCardNumber
                                                 )}
-                                                
                                             </a>
                                         )}
                                     </p>

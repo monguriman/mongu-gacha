@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
-
+import React, { useContext, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { UserStateContext } from '../../App'
 import * as Api from '../../api'
 import { Container, Card, Row, Image, Modal, Button } from 'react-bootstrap'
 import '../../styles/CollectionForm.css'
@@ -40,6 +41,9 @@ function CollectionForm() {
         card_30,
     } = images
 
+    const userState = useContext(UserStateContext)
+    const navigate = useNavigate()
+
     const getCardCount = (cardNumber) => {
         return userCards.filter((card) => card.cardNumber === cardNumber).length
     }
@@ -47,6 +51,15 @@ function CollectionForm() {
     const [totalCards, setTotalCards] = useState([])
     const [userCards, setUserCards] = useState([])
     const [showCongratsModal, setShowCongratsModal] = useState(false)
+
+    useEffect(() => { 
+        console.log(userState.user)
+          // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
+          if (!userState.user) {
+              navigate('/login', { replace: true })
+              return
+          }
+      }, [userState])
 
     useEffect(() => {
         // totalCard 정보를 가져오는 비동기 함수

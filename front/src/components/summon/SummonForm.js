@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import * as Api from '../../api'
 import { Container, Button, Modal, Card, Row, Image } from 'react-bootstrap'
 import { UserStateContext, DispatchContext } from '../../App'
@@ -12,6 +13,7 @@ function SummonForm() {
     const [modalShow, setModalShow] = useState(false)
     const [drewCard, setDrewCard] = useState(null)
     const [userCards, setUserCards] = useState([])
+    const navigate = useNavigate()
 
     const {
         card_1,
@@ -49,6 +51,15 @@ function SummonForm() {
     useEffect(() => {
         fetchUserCards()
     }, [drewCard])
+
+    useEffect(() => { 
+        console.log(userState.user)
+          // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
+          if (!userState.user) {
+              navigate('/login', { replace: true })
+              return
+          }
+      }, [userState])
 
     const fetchUserCards = async () => {
         try {

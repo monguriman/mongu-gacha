@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Wheel } from 'react-custom-roulette'
-import { DispatchContext } from '../../App'
+import { DispatchContext, UserStateContext } from '../../App'
 import { Modal, Button, Container } from 'react-bootstrap'
 import * as Api from '../../api'
 import '../../styles/RouletteForm.css'
@@ -8,6 +9,8 @@ const data = [{ option: 'RED' }, { option: 'BLUE' }]
 
 function RouletteForm() {
     const dispatch = useContext(DispatchContext)
+    const userState = useContext(UserStateContext)
+    const navigate = useNavigate()
 
     const [mustSpin, setMustSpin] = useState(false)
     const [prizeNumber, setPrizeNumber] = useState(0)
@@ -79,6 +82,15 @@ function RouletteForm() {
             payload: user,
         })
     }
+    
+    useEffect(() => { 
+        console.log(userState.user)
+          // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
+          if (!userState.user) {
+              navigate('/login', { replace: true })
+              return
+          }
+      }, [userState])
 
     useEffect(() => {
         setIsResultVisible(false)

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Container, Col, Row, Button } from 'react-bootstrap'
+import { Container, Col, Row, Image } from 'react-bootstrap'
 
 import { UserStateContext } from '../App'
 import * as Api from '../api'
@@ -29,7 +29,8 @@ function Portfolio() {
         setIsFetchCompleted(true)
     }
 
-    useEffect(() => {
+    useEffect(() => { 
+      console.log(userState.user)
         // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
         if (!userState.user) {
             navigate('/login', { replace: true })
@@ -54,39 +55,59 @@ function Portfolio() {
 
     return (
         <>
-<Container>
-  <img src={Logo} />
-<Row className="justify-content-center pt-5 flex-column align-items-center">
-    <Col xs={6} md={5} xl={4} className="mb-5">
-      <img className='homeButton'
-        src={menuButtons['miningButton']}
-        onClick={() => navigate('/mining')}
-        style={{ cursor: 'pointer', width: '100%', height: '100%' }}
-      />
-    </Col>
-    <Col xs={6} md={5} xl={4} className="mb-5">
-      <img className='homeButton'
-        src={menuButtons['summonButton']}
-        onClick={() => navigate('/summon')}
-        style={{ cursor: 'pointer', width: '100%', height: '100%' }}
-      />
-    </Col>
-    <Col xs={6} md={5} xl={4} className="mb-5">
-      <img className='homeButton'
-        src={menuButtons['rouletteButton']}
-        onClick={() => navigate('/roulette')}
-        style={{ cursor: 'pointer', width: '100%', height: '100%' }}
-      />
-    </Col>
-    <Col xs={6} md={5} xl={4} className="mb-5">
-      <img className='homeButton'
-        src={menuButtons['collectionButton']}
-        onClick={() => navigate('/collection')}
-        style={{ cursor: 'pointer', width: '100%', height: '100%' }}
-      />
-    </Col>
-  </Row>
-</Container>
+            <Container>
+            <Row className="justify-content-center pt-5 flex-column align-items-center">
+                <Image src={Logo} className="mb-5" style={{width:'600px'}} />
+                    <Col xs={6} md={5} xl={3} className="mb-5">
+                        <img
+                            className="homeButton"
+                            src={menuButtons['miningButton']}
+                            onClick={() => navigate('/mining')}
+                            style={{
+                                cursor: 'pointer',
+                                width: '100%',
+                                height: '100%',
+                            }}
+                        />
+                    </Col>
+                    <Col xs={6} md={5} xl={3} className="mb-5">
+                        <img
+                            className="homeButton"
+                            src={menuButtons['summonButton']}
+                            onClick={() => navigate('/summon')}
+                            style={{
+                                cursor: 'pointer',
+                                width: '100%',
+                                height: '100%',
+                            }}
+                        />
+                    </Col>
+                    <Col xs={6} md={5} xl={3} className="mb-5">
+                        <img
+                            className="homeButton"
+                            src={menuButtons['rouletteButton']}
+                            onClick={() => navigate('/roulette')}
+                            style={{
+                                cursor: 'pointer',
+                                width: '100%',
+                                height: '100%',
+                            }}
+                        />
+                    </Col>
+                    <Col xs={6} md={5} xl={3} className="mb-5">
+                        <img
+                            className="homeButton"
+                            src={menuButtons['collectionButton']}
+                            onClick={() => navigate('/collection')}
+                            style={{
+                                cursor: 'pointer',
+                                width: '100%',
+                                height: '100%',
+                            }}
+                        />
+                    </Col>
+                </Row>
+            </Container>
         </>
     )
 }

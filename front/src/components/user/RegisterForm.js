@@ -57,7 +57,7 @@ function RegisterForm() {
   }
 
   return (
-    <Container>
+    <Container className='registerContainer' >
       <form class="form_main" onSubmit={handleSubmit}>
         <p class="heading">Sign up</p>
 

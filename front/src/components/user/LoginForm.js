@@ -76,14 +76,16 @@ function LoginForm() {
     }, [userState, navigate])
 
     return (
-        <>  
-        <Container className='logoContainer'>
-        <Image src={Logo} style={{ width: '320px' }} />
-        </Container>
-            
+        <>
+            <Container className="logoContainer">
+                <Image src={Logo} style={{ width: '320px' }} />
+            </Container>
+            <Container className="introContainer">
+                코인을 모아 당신의 카드 콜렉션을 완성해보세요
+                </Container>
             <Container className="loginContainer">
                 <form class="form_main" onSubmit={handleSubmit}>
-                    <p class="heading">Login</p>
+                    <p class="heading">로그인</p>
                     <div class="inputContainer">
                         <svg
                             viewBox="0 0 16 16"
@@ -97,7 +99,7 @@ function LoginForm() {
                         </svg>
                         <input
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Email"
+                            placeholder="이메일"
                             id="username"
                             class="inputField"
                             type="text"
@@ -128,7 +130,7 @@ function LoginForm() {
                         </svg>
                         <input
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Password"
+                            placeholder="패스워드"
                             id="password"
                             class="inputField"
                             type="password"
@@ -146,14 +148,13 @@ function LoginForm() {
                         </Form.Text>
                     )}
 
-                    <button id="button">Submit</button>
+                    <button id="button">로그인</button>
                     <div class="signupContainer">
-                        <p>Don't have any account?</p>
                         <a
                             onClick={() => navigate('/register')}
                             style={{ color: 'white' }}
                         >
-                            Sign up
+                            회원가입
                         </a>
                     </div>
                 </form>

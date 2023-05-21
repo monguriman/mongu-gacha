@@ -29,77 +29,79 @@ function Header() {
 
     return (
         <>
-            <Navbar
-                activeKey={location.pathname}
-                style={{ backgroundColor: 'black', opacity: '70%' }}
-            >
-                <Nav.Item className="me-auto mb-1 mt-1">
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Nav.Link
-                            onClick={() => navigate('/')}
-                            style={{ color: '#FFFFFF', fontWeight: '500' }}
-                        >
-                            Mongu Collectors
-                        </Nav.Link>
-                        {isLogin && portfolioOwner && (
-                            <div
-                                style={{
-                                    textAlign: 'left',
-                                    marginLeft: '10px',
-                                    color: '#FFFFFF',
-                                }}
+            {isLogin && (
+                <Navbar
+                    activeKey={location.pathname}
+                    style={{ backgroundColor: 'black', opacity: '70%' }}
+                >
+                    <Nav.Item className="me-auto mb-1 mt-1">
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <Nav.Link
+                                onClick={() => navigate('/')}
+                                style={{ color: '#FFFFFF', fontWeight: '500' }}
                             >
-                                <p style={{ marginBottom: '5px' }}>
-                                    {portfolioOwner.name} 님
-                                </p>
-                                <p>코인 소지량 {coin}</p>
-                            </div>
-                        )}
-                    </div>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link
-                        onClick={() => navigate('/mining')}
-                        style={{ color: '#FFFFFF', fontWeight: '500' }}
-                    >
-                        채굴
-                    </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link
-                        onClick={() => navigate('/summon')}
-                        style={{ color: '#FFFFFF', fontWeight: '500' }}
-                    >
-                        소환
-                    </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link
-                        onClick={() => navigate('/roulette')}
-                        style={{ color: '#FFFFFF', fontWeight: '500' }}
-                    >
-                        룰렛
-                    </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link
-                        onClick={() => navigate('/collection')}
-                        style={{ color: '#FFFFFF', fontWeight: '500' }}
-                    >
-                        도감
-                    </Nav.Link>
-                </Nav.Item>
-                {isLogin && (
+                                Mongu Collectors
+                            </Nav.Link>
+                            {isLogin && portfolioOwner && (
+                                <div
+                                    style={{
+                                        textAlign: 'left',
+                                        marginLeft: '10px',
+                                        color: '#FFFFFF',
+                                    }}
+                                >
+                                    <p style={{ marginBottom: '5px' }}>
+                                        {portfolioOwner.name} 님
+                                    </p>
+                                    <p>코인 소지량 {coin}</p>
+                                </div>
+                            )}
+                        </div>
+                    </Nav.Item>
                     <Nav.Item>
                         <Nav.Link
-                            onClick={logout}
+                            onClick={() => navigate('/mining')}
                             style={{ color: '#FFFFFF', fontWeight: '500' }}
                         >
-                            로그아웃
+                            채굴
                         </Nav.Link>
                     </Nav.Item>
-                )}
-            </Navbar>
+                    <Nav.Item>
+                        <Nav.Link
+                            onClick={() => navigate('/summon')}
+                            style={{ color: '#FFFFFF', fontWeight: '500' }}
+                        >
+                            소환
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link
+                            onClick={() => navigate('/roulette')}
+                            style={{ color: '#FFFFFF', fontWeight: '500' }}
+                        >
+                            룰렛
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link
+                            onClick={() => navigate('/collection')}
+                            style={{ color: '#FFFFFF', fontWeight: '500' }}
+                        >
+                            도감
+                        </Nav.Link>
+                    </Nav.Item>
+                    {isLogin && (
+                        <Nav.Item>
+                            <Nav.Link
+                                onClick={logout}
+                                style={{ color: '#FFFFFF', fontWeight: '500' }}
+                            >
+                                로그아웃
+                            </Nav.Link>
+                        </Nav.Item>
+                    )}
+                </Navbar>
+            )}
         </>
     )
 }

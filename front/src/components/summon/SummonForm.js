@@ -50,7 +50,7 @@ function SummonForm() {
 
     useEffect(() => {
         fetchUserCards()
-    }, [drewCard])
+    }, [userState])
 
     useEffect(() => {
         // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
@@ -77,6 +77,9 @@ function SummonForm() {
             setDrewCard(card)
             setModalShow(true)
 
+            const updatedUserCards = [...userCards, card] // Update userCards with the newly drawn card
+            setUserCards(updatedUserCards) // Update the userCards state
+
             const userData = await Api.get('user/current')
             const user = userData.data
             dispatch({
@@ -96,8 +99,12 @@ function SummonForm() {
         try {
             const response = await Api.put('user/summonEleven')
             const cards = response.data
-            setDrewCard(cards[cards.length - 1])
+            const lastCard = cards[cards.length - 1]
+            setDrewCard(lastCard)
             setModalShow(true)
+
+            const updatedUserCards = [...userCards, ...cards] // Update userCards with the newly drawn cards
+            setUserCards(updatedUserCards) // Update the userCards state
 
             const userData = await Api.get('user/current')
             const user = userData.data
@@ -159,12 +166,12 @@ function SummonForm() {
                                     <div
                                         className="card-info"
                                         style={{
-                                            position: 'absolute', // Add position absolute to overlay the text
-                                            top: '5%', // Position the text in the middle vertically
-                                            left: '5.5%', // Position the text in the middle horizontally
-                                            transform: 'translate(-50%, -50%)', // Center the text
-                                            color: 'white', // Set the text color to white
-                                            textAlign: 'left', // Center align the text
+                                            position: 'absolute',
+                                            top: '5%',
+                                            left: '5.5%',
+                                            transform: 'translate(-50%, -50%)',
+                                            color: 'white',
+                                            textAlign: 'left',
                                             fontStyle: 'italic',
                                             fontWeight: '900',
                                             fontSize: '1.4rem',
@@ -175,11 +182,11 @@ function SummonForm() {
                                     <div
                                         className="card-info"
                                         style={{
-                                            position: 'absolute', // Add position absolute to overlay the text
-                                            top: '85%', // Position the text in the middle vertically
-                                            right: '8%', // Position the text in the middle horizontally
-                                            color: 'white', // Set the text color to white
-                                            textAlign: 'left', // Center align the text
+                                            position: 'absolute',
+                                            top: '85%',
+                                            right: '8%',
+                                            color: 'white',
+                                            textAlign: 'left',
                                             fontWeight: '300',
                                         }}
                                     ></div>

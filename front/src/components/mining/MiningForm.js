@@ -109,40 +109,76 @@ function MiningForm() {
 
                     <Row className="align-items-center justify-content-center">
                         <Col>
-                        <Container
-                        className="align-items-center justify-content-center text-white"
-                        style={{
-                            fontSize: '13px',
-                            position: 'absolute',
-                            bottom: '20px',
-                            paddingBottom: '135px'
-                        }}
-                    >
-                        * 채굴 버튼 1회당 1개의 코인을 얻을 수 있습니다. <br />*
-                        20%의 확률로 10개의 코인을 얻을 수 있는 크리티컬이
-                        발생합니다.
-                    </Container>
+                            <Container
+                                className="align-items-center justify-content-center text-white"
+                                style={{
+                                    fontSize: '13px',
+                                    position: 'absolute',
+                                    bottom: '20px',
+                                    paddingBottom: '135px',
+                                }}
+                            >
+                                * 채굴 버튼 1회당 1개의 코인을 얻을 수 있습니다.{' '}
+                                <br />* 20%의 확률로 10개의 코인을 얻을 수 있는
+                                크리티컬이 발생합니다.
+                            </Container>
                             <Container className="mt-5 pt-5">
                                 <div onTouchStart="">
                                     <button
                                         className="miningButton"
                                         onMouseDown={handleAddCoin}
                                     >
-                                        <a className="text-white" style={{textDecoration: 'none'}}>채굴</a>
+                                        <a
+                                            className="text-white"
+                                            style={{ textDecoration: 'none' }}
+                                        >
+                                            채굴
+                                        </a>
                                     </button>
                                 </div>
                                 <br />
-                                {criticalText ? (
-                                    <div className="critical-text text-white">
-                                        Critical! +10
-                                    </div>
-                                ) : addText ? (
-                                    <div className="add-text text-white">
-                                        +1
-                                    </div>
-                                ) : (
-                                    <div>　</div>
-                                )}
+                                <Container>
+                                    {criticalText ? (
+                                        <div
+                                            className={`critical-text fade-in-animation ${
+                                                addText
+                                                    ? 'fade-out-animation'
+                                                    : ''
+                                            }`}
+                                            style={{
+                                                fontSize: '25px',
+                                                color: '#ff3333',
+                                                fontStyle: 'italic',
+                                            }}
+                                        >
+                                            Critical!{' '}
+                                            <span
+                                                style={{
+                                                    color: 'white',
+                                                    fontStyle: 'normal',
+                                                }}
+                                            >
+                                                {' '}
+                                                +🪙×10
+                                            </span>
+                                        </div>
+                                    ) : addText ? (
+                                        <div
+                                            className={`add-text text-white fade-in-animation ${
+                                                criticalText
+                                                    ? 'fade-out-animation'
+                                                    : ''
+                                            }`}
+                                            style={{ fontSize: '25px' }}
+                                        >
+                                            +🪙
+                                        </div>
+                                    ) : (
+                                        <div style={{ fontSize: '25px' }}>
+                                            　
+                                        </div>
+                                    )}
+                                </Container>
                             </Container>
                         </Col>
 
@@ -156,7 +192,7 @@ function MiningForm() {
                                         fluid
                                         style={{
                                             borderRadius: '4px',
-                                            border: 'dashed white 3px',
+                                            border: 'dashed white 4px',
                                         }}
                                     />
                                 ) : (
@@ -167,18 +203,19 @@ function MiningForm() {
                                         fluid
                                         style={{
                                             borderRadius: '4px',
-                                            border: 'dashed white 3px',
+                                            border: 'dashed white 4px',
                                         }}
                                     />
                                 )}
                             </Container>
                             <Container className="mt-3 text-white">
-                            나의 코인🪙<span
+                                나의 코인🪙
+                                <span
                                     className={`coin-text ${
                                         shimmer ? 'shimmer-animation' : ''
                                     } `}
                                 >
-                                     {coin.toLocaleString()}
+                                    {coin.toLocaleString()}
                                 </span>
                             </Container>
                         </Col>

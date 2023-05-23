@@ -1,3 +1,4 @@
+/* 코인 개수 반짝임 */
 @keyframes shimmer {
     0% {
         text-shadow: none;
@@ -17,6 +18,51 @@
 
 .coin-text.shimmer-animation {
     animation: shimmer 0.5s linear;
+}
+
+/* +🪙 글씨 애니메이션 */
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.critical-text,
+.add-text {
+    font-size: 25px;
+    transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+}
+
+.critical-text.fade-in-animation {
+    animation: fade-in 0.25s linear forwards;
+}
+
+.add-text.fade-in-animation {
+    animation: fade-in 0.25s linear forwards;
+}
+
+.critical-text.fade-out-animation {
+    animation: fade-out 0.25s linear forwards;
+}
+
+.add-text.fade-out-animation {
+    animation: fade-out 0.25s linear forwards;
 }
 
 .miningButton {

@@ -1,12 +1,12 @@
 @keyframes shimmer {
     0% {
-        border-color: transparent;
+        text-shadow: none;
     }
-    10% {
-        border-color: yellow;
+    3% {
+        text-shadow: 0 0 15px yellow, 0 0 15px yellow;
     }
     100% {
-        border-color: transparent;
+        text-shadow: none;
     }
 }
 
@@ -16,10 +16,7 @@
 }
 
 .coin-text.shimmer-animation {
-    border: solid 5px;
-    border-radius: 20px;
-    animation: shimmer 0.25s linear;
-    box-shadow: 3px 3px 10px yellow;
+    animation: shimmer 0.5s linear;
 }
 
 .miningButton {

@@ -45,9 +45,9 @@ function Header() {
                                     }}
                                 >
                                     <p style={{ marginBottom: '5px' }}>
-                                        {portfolioOwner.name} 님
+                                    🚩{portfolioOwner.name} 님
                                     </p>
-                                    <p>코인 소지량 {coin}</p>
+                                    <p>🪙 {coin.toLocaleString()}</p>
                                 </div>
                             )}
                         </div>

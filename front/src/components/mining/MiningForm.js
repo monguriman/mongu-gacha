@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from 'react'
 import { UserStateContext, DispatchContext } from '../../App'
 import { useNavigate } from 'react-router-dom'
 import * as Api from '../../api'
-import { Container, Card, Image } from 'react-bootstrap'
+import { Container, Card, Image, Row, Col } from 'react-bootstrap'
 import mining_1 from '../../images/mining_1.png'
 import mining_2 from '../../images/mining_2.png'
+import miningBackground from '../../images/miningBackground.png'
 import '../../styles/MiningForm.css'
 
 function MiningForm() {
@@ -90,44 +91,98 @@ function MiningForm() {
     }
 
     return (
-        <Container className="d-flex align-items-center justify-content-center vh-100">
-            <Card style={{ width: '360px' }} className="text-center">
+        <Container className="d-flex align-items-center justify-content-center bg-transparent">
+            <Card
+                className="text-center"
+                style={{
+                    backgroundImage: `url(${miningBackground})`,
+                    backgroundSize: 'cover',
+                    backgroundColor: 'transparent',
+                    backgroundPosition: 'center',
+                    height: '510px',
+                    width: '800px',
+                    marginTop: '200px',
+                }}
+            >
                 <Card.Body>
-                    <div onTouchStart="">
-                        <button
-                            className="miningButton"
-                            onMouseDown={handleAddCoin}
-                        >
-                            <a>채굴</a>
-                        </button>
-                    </div>
                     <br />
-                    <span
-                        className={`coin-text ${
-                            shimmer ? 'shimmer-animation' : ''
-                        }`}
+
+                    <Row className="align-items-center justify-content-center">
+                        <Col>
+                        <Container
+                        className="align-items-center justify-content-center text-white"
+                        style={{
+                            fontSize: '13px',
+                            position: 'absolute',
+                            bottom: '20px',
+                            paddingBottom: '135px'
+                        }}
                     >
-                        코인 {coin}
-                    </span>
-                    <br />
-                    <br />
-                    {criticalText ? (
-                        <div className="critical-text">Critical! +10</div>
-                    ) : addText ? (
-                        <div className="add-text">+1</div>
-                    ) : (
-                        <div>　</div>
-                    )}
-                    {imageNumber === 1 ? (
-                        <Image src={mining_1} alt="Image 1" width="50%" fluid />
-                    ) : (
-                        <Image src={mining_2} alt="Image 2" width="50%" fluid />
-                    )}
-                    <div style={{ fontSize: '11px' }}>
                         * 채굴 버튼 1회당 1개의 코인을 얻을 수 있습니다. <br />*
                         20%의 확률로 10개의 코인을 얻을 수 있는 크리티컬이
                         발생합니다.
-                    </div>
+                    </Container>
+                            <Container className="mt-5 pt-5">
+                                <div onTouchStart="">
+                                    <button
+                                        className="miningButton"
+                                        onMouseDown={handleAddCoin}
+                                    >
+                                        <a className="text-white" style={{textDecoration: 'none'}}>채굴</a>
+                                    </button>
+                                </div>
+                                <br />
+                                {criticalText ? (
+                                    <div className="critical-text text-white">
+                                        Critical! +10
+                                    </div>
+                                ) : addText ? (
+                                    <div className="add-text text-white">
+                                        +1
+                                    </div>
+                                ) : (
+                                    <div>　</div>
+                                )}
+                            </Container>
+                        </Col>
+
+                        <Col>
+                            <Container className="mt-5 pt-4">
+                                {imageNumber === 1 ? (
+                                    <Image
+                                        src={mining_1}
+                                        alt="Image 1"
+                                        width="70%"
+                                        fluid
+                                        style={{
+                                            borderRadius: '4px',
+                                            border: 'dashed white 3px',
+                                        }}
+                                    />
+                                ) : (
+                                    <Image
+                                        src={mining_2}
+                                        alt="Image 2"
+                                        width="70%"
+                                        fluid
+                                        style={{
+                                            borderRadius: '4px',
+                                            border: 'dashed white 3px',
+                                        }}
+                                    />
+                                )}
+                            </Container>
+                            <Container className="mt-3 text-white">
+                            나의 코인🪙<span
+                                    className={`coin-text ${
+                                        shimmer ? 'shimmer-animation' : ''
+                                    } `}
+                                >
+                                     {coin.toLocaleString()}
+                                </span>
+                            </Container>
+                        </Col>
+                    </Row>
                 </Card.Body>
             </Card>
         </Container>

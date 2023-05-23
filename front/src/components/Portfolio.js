@@ -57,7 +57,7 @@ function Portfolio() {
         <>
             <Container>
             <Row className="justify-content-center pt-5 flex-column align-items-center">
-                <Image src={Logo} className="mb-5" style={{width:'600px'}} />
+                <Image src={Logo} className="mb-5 mt-3" style={{width:'400px'}} />
                     <Col xs={6} md={5} xl={3} className="mb-5">
                         <img
                             className="homeButton"

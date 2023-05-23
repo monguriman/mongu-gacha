@@ -14,7 +14,6 @@ class userAuthService {
 
         // 비밀번호 해쉬화
         const hashedPassword = await bcrypt.hash(password, 10);
-
         const newUser = { name, email, password: hashedPassword };
 
         // db에 저장

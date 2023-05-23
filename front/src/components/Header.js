@@ -36,12 +36,6 @@ function Header() {
                 >
                     <Nav.Item className="me-auto mb-1 mt-1">
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <Nav.Link
-                                onClick={() => navigate('/')}
-                                style={{ color: '#FFFFFF', fontWeight: '500' }}
-                            >
-                                Mongu Collectors
-                            </Nav.Link>
                             {isLogin && portfolioOwner && (
                                 <div
                                     style={{
@@ -60,8 +54,24 @@ function Header() {
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link
+                            onClick={() => navigate('/')}
+                            style={{
+                                color: '#FFFFFF',
+                                fontWeight: '500',
+                                fontSize: '0.9rem',
+                            }}
+                        >
+                            홈
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link
                             onClick={() => navigate('/mining')}
-                            style={{ color: '#FFFFFF', fontWeight: '500' }}
+                            style={{
+                                color: '#FFFFFF',
+                                fontWeight: '500',
+                                fontSize: '0.9rem',
+                            }}
                         >
                             채굴
                         </Nav.Link>
@@ -69,7 +79,11 @@ function Header() {
                     <Nav.Item>
                         <Nav.Link
                             onClick={() => navigate('/summon')}
-                            style={{ color: '#FFFFFF', fontWeight: '500' }}
+                            style={{
+                                color: '#FFFFFF',
+                                fontWeight: '500',
+                                fontSize: '0.9rem',
+                            }}
                         >
                             소환
                         </Nav.Link>
@@ -77,7 +91,11 @@ function Header() {
                     <Nav.Item>
                         <Nav.Link
                             onClick={() => navigate('/roulette')}
-                            style={{ color: '#FFFFFF', fontWeight: '500' }}
+                            style={{
+                                color: '#FFFFFF',
+                                fontWeight: '500',
+                                fontSize: '0.9rem',
+                            }}
                         >
                             룰렛
                         </Nav.Link>
@@ -85,7 +103,11 @@ function Header() {
                     <Nav.Item>
                         <Nav.Link
                             onClick={() => navigate('/collection')}
-                            style={{ color: '#FFFFFF', fontWeight: '500' }}
+                            style={{
+                                color: '#FFFFFF',
+                                fontWeight: '500',
+                                fontSize: '0.9rem',
+                            }}
                         >
                             도감
                         </Nav.Link>
@@ -94,7 +116,11 @@ function Header() {
                         <Nav.Item>
                             <Nav.Link
                                 onClick={logout}
-                                style={{ color: '#FFFFFF', fontWeight: '500' }}
+                                style={{
+                                    color: '#FFFFFF',
+                                    fontWeight: '500',
+                                    fontSize: '0.9rem',
+                                }}
                             >
                                 로그아웃
                             </Nav.Link>

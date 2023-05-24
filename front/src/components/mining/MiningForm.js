@@ -101,8 +101,8 @@ function MiningForm() {
                     backgroundPosition: 'center',
                     height: '510px',
                     width: '800px',
-                    marginTop: '200px',
-                    position: 'relative'
+                    marginTop: '15%',
+                    position: 'relative',
                 }}
             >
                 <Card.Body>

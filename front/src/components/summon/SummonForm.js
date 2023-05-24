@@ -227,7 +227,7 @@ function SummonForm() {
                     backgroundPosition: 'center',
                     height: '510px',
                     width: '800px',
-                    marginTop: '200px',
+                    marginTop: '15%',
                     position: 'relative',
                 }}
             >
@@ -249,22 +249,21 @@ function SummonForm() {
                                 onClick={handleSummon}
                                 disabled={userState.coin < 30}
                             >
-                                소환 <br /><a style={{fontSize: '12px'}}>🪙30</a>
+                                소환 <br />
+                                <a style={{ fontSize: '12px' }}>🪙30</a>
                             </Button>
                             <Button
                                 className="shadow__btn ms-3"
                                 onClick={handleSummonEleven}
                                 disabled={userState.coin < 300}
                             >
-                                11연속 소환 <br /><a style={{fontSize: '12px'}}>🪙300</a>
+                                11연속 소환 <br />
+                                <a style={{ fontSize: '12px' }}>🪙300</a>
                             </Button>
                         </Container>
                     </Row>
                 </Card.Body>
             </Card>
-
-            <div>　</div>
-
             <Modal
                 show={modalShow}
                 onHide={() => setModalShow(false)}

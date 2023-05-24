@@ -144,12 +144,7 @@ label {
   padding: 0 42px;
   text-transform: uppercase;
 }
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary:active:focus {
-  background-color: #f9423a;
-}
+
 
 .btn-border {
   border: 1px solid #d7d8db;

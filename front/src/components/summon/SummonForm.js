@@ -234,7 +234,6 @@ function SummonForm() {
                 <Card.Body>
                     <Row className="align-items-center justify-content-center">
                         <Container
-                            className="align-items-center justify-content-center text-white"
                             style={{
                                 fontSize: '13px',
                                 position: 'absolute',
@@ -246,18 +245,18 @@ function SummonForm() {
                             }}
                         >
                             <Button
-                                className="shadow__btn me-5"
+                                className="shadow__btn me-3"
                                 onClick={handleSummon}
                                 disabled={userState.coin < 30}
                             >
-                                소환
+                                소환 <br /><a style={{fontSize: '12px'}}>🪙30</a>
                             </Button>
                             <Button
-                                className="shadow__btn"
+                                className="shadow__btn ms-3"
                                 onClick={handleSummonEleven}
                                 disabled={userState.coin < 300}
                             >
-                                11연속 소환
+                                11연속 소환 <br /><a style={{fontSize: '12px'}}>🪙300</a>
                             </Button>
                         </Container>
                     </Row>

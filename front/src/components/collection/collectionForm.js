@@ -53,7 +53,6 @@ function CollectionForm() {
     const [showCongratsModal, setShowCongratsModal] = useState(false)
 
     useEffect(() => {
-        
         // 전역 상태의 user가 null이라면 로그인이 안 된 상태이므로, 로그인 페이지로 돌림.
         if (!userState.user) {
             alert('로그인 후 사용가능한 메뉴입니다.')
@@ -115,18 +114,27 @@ function CollectionForm() {
                 <Card
                     className={`mb-5 mt-3 ms-5 mr-5`}
                     style={{
-                        position: 'relative', // Add position relative to the card
+                        position: 'relative',
                         width: '18rem',
                         height: '21.46rem',
                         borderRadius: '4px',
+                        overflow: 'hidden',
                         backgroundImage: `url(${cardImage})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
                         filter: isCardOwned(card.totalCardNumber)
                             ? ''
                             : 'grayscale(100%) blur(10px)',
+                        transition: 'background-size 0.3s',// Add transition property for smooth scaling
                     }}
                     key={card.totalCardNumber}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundSize = '110%' // Apply background image zoom when mouse enters
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundSize = 'cover' // Reset background image size when mouse leaves
+                    }}
                 >
                     <Card.Body>
                         <Row className="justify-content-md-center">
@@ -201,8 +209,25 @@ function CollectionForm() {
 
     return (
         <>
-            <h2 className="text-center mt-5 mb-4">나의 도감</h2>
-            <h3 className="text-center completion-percentage">
+            <h2
+                className="text-center mt-5 mb-4"
+                style={{
+                    color: 'white',
+                    fontSize: '32px',
+                    fontWeight: 'bold',
+                    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+                }}
+            >
+                나의 도감
+            </h2>
+            <h3
+                className="text-center completion-percentage"
+                style={{
+                    color: 'pink',
+                    fontSize: '24px',
+                    textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+                }}
+            >
                 도감 완성도: {calculateCompletionPercentage()}%
             </h3>
 

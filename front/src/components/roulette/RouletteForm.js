@@ -135,7 +135,7 @@ function RouletteForm() {
                     <Row className="">
                         <Col
                             xs="6"
-                            className="d-flex align-items-center justify-content-center"
+                            className="ps-4 mt-5 pt-4 d-flex align-items-center justify-content-center"
                         >
                             <div class="wheelContainer">
                                     <Wheel
@@ -148,6 +148,7 @@ function RouletteForm() {
                                             setMustSpin(false)
                                         }}
                                         spinDuration={0.3}
+                                        fontSize={'28'}
                                         outerBorderColor={['#f2f2f2']}
                                         outerBorderWidth={[3]}
                                         innerBorderColor={['#f2f2f2']}

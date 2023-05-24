@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Wheel } from 'react-custom-roulette'
 import { DispatchContext, UserStateContext } from '../../App'
-import { Modal, Button, Container } from 'react-bootstrap'
+import { Card, Col, Row, Modal, Button, Container } from 'react-bootstrap'
 import * as Api from '../../api'
 import '../../styles/RouletteForm.css'
+import rouletteBackground from '../../images/rouletteBackground.png'
 const data = [{ option: 'RED' }, { option: 'BLUE' }]
 
 function RouletteForm() {
@@ -116,80 +117,110 @@ function RouletteForm() {
     }, [isResultVisible])
 
     return (
-        <Container
-            fluid
-            className="vh-100 d-flex align-items-center justify-content-center"
-        >
-            <div className="d-flex flex-column align-items-center justify-content-center">
-                <Wheel
-                    mustStartSpinning={mustSpin}
-                    prizeNumber={prizeNumber}
-                    data={data}
-                    onStopSpinning={() => {
-                        handleStop()
-                        setIsResultVisible(true)
-                        setMustSpin(false)
-                    }}
-                    spinDuration={0.3}
-                    outerBorderColor={['#f2f2f2']}
-                    outerBorderWidth={[25]}
-                    innerBorderColor={['#f2f2f2']}
-                    radiusLineColor={['#dedede']}
-                    radiusLineWidth={[10]}
-                    backgroundColors={['#F22B35', '#46AEFF']}
-                />
-                <br />
-                <input
-                    className="input"
-                    type="number"
-                    value={betAmount}
-                    onChange={(event) =>
-                        setBetAmount(event.target.value.replace(/\D/g, ''))
-                    }
-                    placeholder="베팅할 코인 개수"
-                    disabled={mustSpin}
-                />
-                <br />
-                <select
-                    value={betColor}
-                    onChange={(event) => setBetColor(event.target.value)}
-                    placeholder="베팅할 색"
-                    disabled={mustSpin}
-                >
-                    <option value="">베팅할 색깔</option>
-                    <option value="RED">RED</option>
-                    <option value="BLUE">BLUE</option>
-                </select>
-                <br />
-                <button
-                    onClick={handleSpinClick}
-                    disabled={mustSpin || !betAmount || !betColor}
-                >
-                    SPIN
-                </button>
-
-                {isResultVisible && (
-                    <Modal
-                        show={isResultVisible}
-                        onHide={() => setIsResultVisible(false)}
-                    >
-                        <Modal.Header closeButton>
-                            <Modal.Title>결과</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <p>{resultMessage}</p>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button
-                                variant="secondary"
-                                onClick={() => setIsResultVisible(false)}
+        <Container className="d-flex align-items-center justify-content-center bg-transparent">
+            <Card
+                className="text-center"
+                style={{
+                    backgroundImage: `url(${rouletteBackground})`,
+                    backgroundSize: 'cover',
+                    backgroundColor: 'transparent',
+                    backgroundPosition: 'center',
+                    height: '510px',
+                    width: '800px',
+                    marginTop: '15%',
+                    position: 'relative',
+                }}
+            >
+                <Card.Body>
+                    <Row className="">
+                        <Col
+                            xs="6"
+                            className="d-flex align-items-center justify-content-center"
+                        >
+                            <div class="wheelContainer">
+                                    <Wheel
+                                        mustStartSpinning={mustSpin}
+                                        prizeNumber={prizeNumber}
+                                        data={data}
+                                        onStopSpinning={() => {
+                                            handleStop()
+                                            setIsResultVisible(true)
+                                            setMustSpin(false)
+                                        }}
+                                        spinDuration={0.3}
+                                        outerBorderColor={['#f2f2f2']}
+                                        outerBorderWidth={[3]}
+                                        innerBorderColor={['#f2f2f2']}
+                                        radiusLineColor={['#dedede']}
+                                        radiusLineWidth={[3]}
+                                        backgroundColors={[
+                                            '#F22B35',
+                                            '#46AEFF',
+                                        ]}
+                                        radius={100}
+                                    />
+                                </div>
+                        </Col>
+                        <Col
+                            xs="6"
+                            className="d-flex flex-column align-items-center justify-content-center"
+                        >
+                            <input
+                                className="input mb-3"
+                                type="number"
+                                value={betAmount}
+                                onChange={(event) =>
+                                    setBetAmount(
+                                        event.target.value.replace(/\D/g, '')
+                                    )
+                                }
+                                placeholder="베팅할 코인 개수"
+                                disabled={mustSpin}
+                            />
+                            <select
+                                value={betColor}
+                                onChange={(event) =>
+                                    setBetColor(event.target.value)
+                                }
+                                placeholder="베팅할 색"
+                                disabled={mustSpin}
                             >
-                                닫기
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
-                )}
-            </div>
+                                <option value="">베팅할 색깔</option>
+                                <option value="RED">RED</option>
+                                <option value="BLUE">BLUE</option>
+                            </select>
+                            <button
+                                onClick={handleSpinClick}
+                                disabled={mustSpin || !betAmount || !betColor}
+                                className="mt-3"
+                            >
+                                SPIN
+                            </button>
+                        </Col>
+                    </Row>
+                    {isResultVisible && (
+                        <Modal
+                            show={isResultVisible}
+                            onHide={() => setIsResultVisible(false)}
+                        >
+                            <Modal.Header closeButton>
+                                <Modal.Title>결과</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <p>{resultMessage}</p>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button
+                                    variant="secondary"
+                                    onClick={() => setIsResultVisible(false)}
+                                >
+                                    닫기
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                    )}
+                </Card.Body>
+            </Card>
         </Container>
     )
 }

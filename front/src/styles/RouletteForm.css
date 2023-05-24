@@ -15,3 +15,15 @@
     outline-offset: 5px;
     background-color: #fff;
 }
+
+.wheelContainer {
+    width: 290px;
+    height: 290px;
+
+    > div {
+        height: 100%;
+        width: 100%;
+        max-height: unset;
+        max-width: unset;
+    }
+}

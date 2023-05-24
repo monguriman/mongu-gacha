@@ -1,12 +1,20 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as Api from '../../api'
-import { Container, Button, Modal, Card, Row, Image } from 'react-bootstrap'
+import {
+    Col,
+    Container,
+    Button,
+    Modal,
+    Card,
+    Row,
+    Image,
+} from 'react-bootstrap'
 import { UserStateContext, DispatchContext } from '../../App'
 import '../../styles/SummonForm.css'
 import images from '../../images/imageIndex'
 import cardFrames from '../../images/cardFrames'
-
+import summonBackground from '../../images/summonBackground.png'
 
 function SummonForm() {
     const dispatch = useContext(DispatchContext)
@@ -209,22 +217,51 @@ function SummonForm() {
     }
 
     return (
-        <Container>
-            <Button
-                className="summon-button"
-                onClick={handleSummon}
-                disabled={userState.coin < 30}
+        <Container className="d-flex align-items-center justify-content-center bg-transparent">
+            <Card
+                className="text-center"
+                style={{
+                    backgroundImage: `url(${summonBackground})`,
+                    backgroundSize: 'cover',
+                    backgroundColor: 'transparent',
+                    backgroundPosition: 'center',
+                    height: '510px',
+                    width: '800px',
+                    marginTop: '200px',
+                }}
             >
-                소환
-            </Button>
+                <Card.Body>
+                    <Row className="align-items-center justify-content-center">
+                        <Col>
+                            <Container
+                                className="align-items-center justify-content-center text-white"
+                                style={{
+                                    fontSize: '13px',
+                                    position: 'absolute',
+                                    bottom: '20px',
+                                    paddingBottom: '135px',
+                                }}
+                            >
+                                <Button
+                                    className="shadow__btn"
+                                    onClick={handleSummon}
+                                    disabled={userState.coin < 30}
+                                >
+                                    소환
+                                </Button>
+                                <Button
+                                    className="shadow__btn"
+                                    onClick={handleSummonEleven}
+                                    disabled={userState.coin < 300}
+                                >
+                                    11연속 소환
+                                </Button>
+                            </Container>
+                        </Col>
+                    </Row>
+                </Card.Body>
+            </Card>
             <div>　</div>
-            <Button
-                className="summon-button"
-                onClick={handleSummonEleven}
-                disabled={userState.coin < 300}
-            >
-                11연속 소환
-            </Button>
 
             <Modal
                 show={modalShow}

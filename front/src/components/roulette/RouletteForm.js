@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Wheel } from 'react-custom-roulette'
 import { DispatchContext, UserStateContext } from '../../App'
-import { Card, Col, Row, Modal, Button, Container } from 'react-bootstrap'
+import { Card, Col, Row, Modal, Button, Container, Form } from 'react-bootstrap'
 import * as Api from '../../api'
 import '../../styles/RouletteForm.css'
 import rouletteBackground from '../../images/rouletteBackground.png'
@@ -135,39 +135,58 @@ function RouletteForm() {
                     <Row className="">
                         <Col
                             xs="6"
-                            className="ps-4 mt-5 pt-4 d-flex align-items-center justify-content-center"
+                            className="ps-4 mt-4 pt-4 d-flex align-items-center justify-content-center"
                         >
+                            <Container
+                                className="text-white"
+                                style={{
+                                    fontSize: '13px',
+                                    position: 'absolute',
+                                    bottom: '20px',
+                                    paddingLeft: '195px',
+                                    paddingBottom: '115px',
+                                    textAlign: 'left',
+                                }}
+                            >
+                                베팅한 색깔과 룰렛의 결과가 일치하면 게임
+                                승리입니다.
+                                <br />
+                                게임에 승리하면 베팅한 코인의 2배를 얻습니다.
+                            </Container>
                             <div class="wheelContainer">
-                                    <Wheel
-                                        mustStartSpinning={mustSpin}
-                                        prizeNumber={prizeNumber}
-                                        data={data}
-                                        onStopSpinning={() => {
-                                            handleStop()
-                                            setIsResultVisible(true)
-                                            setMustSpin(false)
-                                        }}
-                                        spinDuration={0.3}
-                                        fontSize={'28'}
-                                        outerBorderColor={['#f2f2f2']}
-                                        outerBorderWidth={[3]}
-                                        innerBorderColor={['#f2f2f2']}
-                                        radiusLineColor={['#dedede']}
-                                        radiusLineWidth={[3]}
-                                        backgroundColors={[
-                                            '#F22B35',
-                                            '#46AEFF',
-                                        ]}
-                                        radius={100}
-                                    />
-                                </div>
+                                <Wheel
+                                    mustStartSpinning={mustSpin}
+                                    prizeNumber={prizeNumber}
+                                    data={data}
+                                    onStopSpinning={() => {
+                                        handleStop()
+                                        setIsResultVisible(true)
+                                        setMustSpin(false)
+                                    }}
+                                    spinDuration={0.3}
+                                    fontSize={'28'}
+                                    outerBorderColor={['#f2f2f2']}
+                                    outerBorderWidth={[3]}
+                                    innerBorderColor={['#f2f2f2']}
+                                    radiusLineColor={['#dedede']}
+                                    radiusLineWidth={[3]}
+                                    backgroundColors={['#F22B35', '#46AEFF']}
+                                    radius={100}
+                                />
+                            </div>
                         </Col>
                         <Col
                             xs="6"
                             className="d-flex flex-column align-items-center justify-content-center"
                         >
+                            <Container
+                                style={{ color: 'white', fontSize: '14px' }}
+                                className="mt-4 pt-4 mb-2"
+                            >
+                                베팅할 코인 개수
+                            </Container>
                             <input
-                                className="input mb-3"
+                                className="input"
                                 type="number"
                                 value={betAmount}
                                 onChange={(event) =>
@@ -175,28 +194,95 @@ function RouletteForm() {
                                         event.target.value.replace(/\D/g, '')
                                     )
                                 }
-                                placeholder="베팅할 코인 개수"
                                 disabled={mustSpin}
                             />
-                            <select
-                                value={betColor}
-                                onChange={(event) =>
-                                    setBetColor(event.target.value)
-                                }
-                                placeholder="베팅할 색"
-                                disabled={mustSpin}
+                            <Container
+                                style={{ color: 'white', fontSize: '14px' }}
+                                className="mt-4 mb-1"
                             >
-                                <option value="">베팅할 색깔</option>
-                                <option value="RED">RED</option>
-                                <option value="BLUE">BLUE</option>
-                            </select>
-                            <button
+                                베팅할 색깔
+                            </Container>
+                            <Form.Group className="mb-3">
+                                <input
+                                    className="input-btn"
+                                    type="radio"
+                                    id="red"
+                                    name="betColor"
+                                    value="RED"
+                                    checked={betColor === 'RED'}
+                                    onChange={(event) =>
+                                        setBetColor(event.target.value)
+                                    }
+                                    disabled={mustSpin}
+                                    style={{
+                                        display: 'none',
+                                    }}
+                                />
+                                <label
+                                    className={`neon-btn ${
+                                        betColor === 'RED' ? 'active' : ''
+                                    }`}
+                                    htmlFor="red"
+                                >
+                                    <span className="span"></span>
+                                    <span
+                                        className="txt"
+                                        style={{
+                                            color: 'white',
+                                            fontSize: '20px',
+                                            fontWeight: '900',
+                                        }}
+                                    >
+                                        🔴RED🔴
+                                    </span>
+                                </label>
+                                <input
+                                    className="input-btn"
+                                    type="radio"
+                                    id="blue"
+                                    name="betColor"
+                                    value="BLUE"
+                                    checked={betColor === 'BLUE'}
+                                    onChange={(event) =>
+                                        setBetColor(event.target.value)
+                                    }
+                                    disabled={mustSpin}
+                                    style={{
+                                        display: 'none',
+                                    }}
+                                />
+                                <label
+                                    className={`neon-btn ${
+                                        betColor === 'BLUE' ? 'active' : ''
+                                    }`}
+                                    htmlFor="blue"
+                                >
+                                    <span className="span"></span>
+                                    <span
+                                        className="txt"
+                                        style={{
+                                            color: 'white',
+                                            fontSize: '20px',
+                                            fontWeight: '900',
+                                        }}
+                                    >
+                                        🔵BLUE🔵
+                                    </span>
+                                </label>
+                            </Form.Group>
+
+                            <Button
                                 onClick={handleSpinClick}
                                 disabled={mustSpin || !betAmount || !betColor}
-                                className="mt-3"
+                                className="shadow__btn me-3"
+                                style={{
+                                    fontSize: '15px',
+                                    height: '40px',
+                                    width: '100px',
+                                }}
                             >
-                                SPIN
-                            </button>
+                                시작
+                            </Button>
                         </Col>
                     </Row>
                     {isResultVisible && (

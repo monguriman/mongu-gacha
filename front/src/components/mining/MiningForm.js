@@ -119,8 +119,8 @@ function MiningForm() {
                                     paddingBottom: '135px',
                                 }}
                             >
-                                * 채굴 버튼 1회당 1개의 코인을 얻을 수 있습니다.{' '}
-                                <br />* 20%의 확률로 10개의 코인을 얻을 수 있는
+                                채굴 버튼 1회당 1개의 코인을 얻을 수 있습니다.{' '}
+                                <br />20%의 확률로 10개의 코인을 얻을 수 있는
                                 크리티컬이 발생합니다.
                             </Container>
                             <Container className="mt-5 pt-5">

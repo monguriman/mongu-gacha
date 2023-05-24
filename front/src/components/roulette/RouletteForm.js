@@ -60,13 +60,13 @@ function RouletteForm() {
                         await Api.put('user/coin', addRequestBody)
 
                         setResultMessage(
-                            `축하합니다! ${addAmount} 코인을 얻었습니다.`
+                            `축하합니다! ${addAmount.toLocaleString()} 코인을 얻었습니다.`
                         )
                     } catch (error) {
                         console.log(error)
                     }
                 } else {
-                    setResultMessage(`${betAmount} 코인을 잃었습니다.`)
+                    setResultMessage(`${betAmount.toLocaleString()} 코인을 잃었습니다.`)
                 }
             } catch (error) {
                 console.log(error)

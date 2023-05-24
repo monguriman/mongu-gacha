@@ -126,7 +126,7 @@ function CollectionForm() {
                         filter: isCardOwned(card.totalCardNumber)
                             ? ''
                             : 'grayscale(100%) blur(10px)',
-                        transition: 'background-size 0.3s',// Add transition property for smooth scaling
+                        transition: 'transform 0.3s',
                     }}
                     key={card.totalCardNumber}
                     onMouseEnter={(e) => {

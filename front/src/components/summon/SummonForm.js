@@ -228,39 +228,42 @@ function SummonForm() {
                     height: '510px',
                     width: '800px',
                     marginTop: '200px',
+                    position: 'relative',
                 }}
             >
                 <Card.Body>
                     <Row className="align-items-center justify-content-center">
-                        <Col>
-                            <Container
-                                className="align-items-center justify-content-center text-white"
-                                style={{
-                                    fontSize: '13px',
-                                    position: 'absolute',
-                                    bottom: '20px',
-                                    paddingBottom: '135px',
-                                }}
+                        <Container
+                            className="align-items-center justify-content-center text-white"
+                            style={{
+                                fontSize: '13px',
+                                position: 'absolute',
+                                bottom: '5%',
+                                height: '100%',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Button
+                                className="shadow__btn me-5"
+                                onClick={handleSummon}
+                                disabled={userState.coin < 30}
                             >
-                                <Button
-                                    className="shadow__btn"
-                                    onClick={handleSummon}
-                                    disabled={userState.coin < 30}
-                                >
-                                    소환
-                                </Button>
-                                <Button
-                                    className="shadow__btn"
-                                    onClick={handleSummonEleven}
-                                    disabled={userState.coin < 300}
-                                >
-                                    11연속 소환
-                                </Button>
-                            </Container>
-                        </Col>
+                                소환
+                            </Button>
+                            <Button
+                                className="shadow__btn"
+                                onClick={handleSummonEleven}
+                                disabled={userState.coin < 300}
+                            >
+                                11연속 소환
+                            </Button>
+                        </Container>
                     </Row>
                 </Card.Body>
             </Card>
+
             <div>　</div>
 
             <Modal

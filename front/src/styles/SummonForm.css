@@ -6,9 +6,8 @@
     font-size: 17px;
     color: #fff;
     border-radius: 7px;
-    letter-spacing: 4px;
-    font-weight: 700;
-    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 500;
     transition: 0.5s;
     transition-property: box-shadow;
   }

@@ -1,15 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import * as Api from '../../api'
-import {
-    Col,
-    Container,
-    Button,
-    Modal,
-    Card,
-    Row,
-    Image,
-} from 'react-bootstrap'
+import { Container, Button, Modal, Card, Row, Image } from 'react-bootstrap'
 import { UserStateContext, DispatchContext } from '../../App'
 import '../../styles/SummonForm.css'
 import images from '../../images/imageIndex'
@@ -137,7 +129,10 @@ function SummonForm() {
     const renderModalContent = () => {
         if (drewCard) {
             const newCardNumber = drewCard.cardNumber
-            const isExistingCard = userCards.some(
+            const userCardsMinusNew = userCards.slice(0,userCards.length-1)
+            console.log('원본', userCards)
+            console.log('비교용', userCardsMinusNew)
+            const isExistingCard = userCardsMinusNew.some(
                 (card) => card.cardNumber === newCardNumber
             )
 
@@ -203,7 +198,7 @@ function SummonForm() {
                             </Row>
                         </Card.Body>
                     </Card>
-                    <div className="modal-card-reveal-animation mt-5">
+                    <div className="modal-card-reveal-animation mt-3">
                         {isExistingCard ? (
                             <p>이미 가지고 있는 카드입니다.</p>
                         ) : (
